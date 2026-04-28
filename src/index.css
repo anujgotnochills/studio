@@ -33,7 +33,6 @@ html {
   scroll-behavior: auto;
   /* Fluid base font: 14px at 320px, 16px at 1200px */
   font-size: clamp(0.875rem, 0.8rem + 0.25vw, 1rem);
-  overflow-x: hidden;
 }
 
 /* Lenis smooth scrolling styles */
@@ -51,12 +50,10 @@ html.lenis {
 
 body, #root {
   font-family: 'Outfit', sans-serif;
-  overflow-x: hidden;
   max-width: 100vw;
   /* For smooth scroll implementation */
   position: relative;
-  height: 100%;
-  overscroll-behavior-y: none;
+  min-height: 100vh;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-rendering: optimizeLegibility;
