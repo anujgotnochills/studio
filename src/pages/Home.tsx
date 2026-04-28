@@ -62,8 +62,8 @@ function Home() {
                 logos={studioLogos}
                 speed={50}
                 direction="left"
-                logoHeight={120}
-                gap={48}
+                logoHeight={160}
+                gap={24}
                 fadeOut
                 fadeOutColor="#0d0d0d"
                 pauseOnHover

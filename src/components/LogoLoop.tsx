@@ -348,7 +348,7 @@ export const LogoLoop = React.memo<LogoLoopProps>(
               'motion-reduce:transition-none',
               scaleOnHover &&
                 'transition-transform duration-300 ease-[cubic-bezier(0.4,0,0.2,1)] group-hover/item:scale-120',
-              cleanLogos && '[mix-blend-mode:screen] [filter:invert(1)_hue-rotate(180deg)_brightness(1.5)_contrast(1.5)]'
+              cleanLogos && '[filter:url(#black-to-white)]'
             )}
             src={(item as any).src}
             srcSet={(item as any).srcSet}
@@ -434,6 +434,20 @@ export const LogoLoop = React.memo<LogoLoopProps>(
 
     return (
       <div ref={containerRef} className={rootClasses} style={containerStyle} role="region" aria-label={ariaLabel}>
+        {/* Custom SVG filter to intelligently convert only black pixels to white, preserving other colors */}
+        <svg width="0" height="0" className="absolute pointer-events-none">
+          <filter id="black-to-white">
+            <feColorMatrix in="SourceGraphic" type="matrix" values="-1 0 0 0 1  0 -1 0 0 1  0 0 -1 0 1  0 0 0 1 0" result="inverted" />
+            <feColorMatrix in="inverted" type="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0.333 0.333 0.333 0 0" result="maskAlpha" />
+            <feComponentTransfer in="maskAlpha" result="sharpMask">
+              <feFuncA type="linear" slope="1000" intercept="-990" />
+            </feComponentTransfer>
+            <feColorMatrix in="sharpMask" type="matrix" values="0 0 0 0 1  0 0 0 0 1  0 0 0 0 1  0 0 0 1 0" result="whiteMask" />
+            <feComposite in="whiteMask" in2="SourceGraphic" operator="in" result="maskedWhite" />
+            <feComposite in="SourceGraphic" in2="maskedWhite" operator="arithmetic" k2="1" k3="1" />
+          </filter>
+        </svg>
+
         {fadeOut && (
           <>
             {isVertical ? (

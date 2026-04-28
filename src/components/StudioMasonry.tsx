@@ -1,10 +1,21 @@
+import { useState, useEffect } from 'react';
 import { useStudioPhotos } from '@/lib/hooks';
 import Masonry, { MasonryItem } from './ui/Masonry';
 
 export default function StudioMasonry() {
   const { data: studioPhotos } = useStudioPhotos();
+  const [isMobile, setIsMobile] = useState(false);
 
-  const masonryItems: MasonryItem[] = studioPhotos.map(p => ({
+  useEffect(() => {
+    const checkMobile = () => setIsMobile(window.innerWidth < 768);
+    checkMobile(); // Check initially
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
+
+  const displayedPhotos = isMobile ? studioPhotos.slice(0, 8) : studioPhotos;
+
+  const masonryItems: MasonryItem[] = displayedPhotos.map(p => ({
     id: p.id,
     img: p.image_url,
     url: '#',
