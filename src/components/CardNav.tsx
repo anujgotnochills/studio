@@ -62,18 +62,18 @@ const CardNav: React.FC<CardNavProps> = ({ items, className = "" }) => {
               alt="Endurance Image Logo"
               className="w-8 h-8 md:w-10 md:h-10 rounded-lg object-contain group-hover:scale-110 transition-transform"
             />
-            <div className="flex flex-col justify-center">
+            <div className="flex flex-col justify-center items-start text-left">
               <Shuffle
                 text="ENDURANCE"
                 tag="span"
-                className="font-black tracking-tight text-[14px] sm:text-[15px] md:text-[17px] text-foreground leading-[1.1]"
+                className="font-black tracking-tight text-[12px] sm:text-[13px] md:text-[15px] text-white leading-[1.1]"
                 duration={0.5}
                 shuffleTimes={2}
               />
               <Shuffle
                 text="IMAGE"
                 tag="span"
-                className="font-black tracking-tight text-[14px] sm:text-[15px] md:text-[17px] text-primary leading-[1.1]"
+                className="font-black tracking-tight text-[12px] sm:text-[13px] md:text-[15px] text-white leading-[1.1]"
                 duration={0.5}
                 shuffleTimes={2}
               />

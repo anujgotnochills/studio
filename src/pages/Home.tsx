@@ -53,11 +53,8 @@ function Home() {
         <section className="py-6 sm:py-10 md:py-14 relative z-10 overflow-hidden">
           <LazySection preloadDistance={300} threshold={0.1}>
             <div className="max-w-[95%] md:max-w-[85%] lg:max-w-[80%] mx-auto px-4 md:px-6 mb-6 md:mb-8 text-center">
-              <p className="text-primary font-black text-xs tracking-[0.3em] uppercase mb-3 opacity-70">
-                Companies We Worked With
-              </p>
               <h2 className="text-2xl sm:text-3xl md:text-4xl font-black text-foreground mb-0">
-                Our Trusted Partners
+                Brands that Trust us
               </h2>
             </div>
             <Suspense fallback={<LoadingFallback />}>
@@ -91,7 +88,7 @@ function Home() {
         <LazySection preloadDistance={300} threshold={0.1}>
           <Suspense fallback={<LoadingFallback />}>
             <div className="py-6 md:py-10 px-4 md:px-6">
-              <CurvedLoop marqueeText={"100+ Brands Served - 5000+ Videos Delivered - Producing Since 2019"} speed={3.0} curveAmount={450} direction="left" />
+              <CurvedLoop marqueeText={"SINCE 2019 | 100+ BRANDS SERVED | 5000+ VIDEOS DELIVERED"} speed={3.0} curveAmount={180} direction="left" />
             </div>
           </Suspense>
         </LazySection>

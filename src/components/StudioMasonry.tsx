@@ -14,11 +14,8 @@ export default function StudioMasonry() {
   return (
     <section className="relative w-full py-12 md:py-20 px-3 sm:px-4 md:px-8 bg-transparent overflow-hidden">
       <div className="text-center mb-10 md:mb-16 relative z-10 px-4 md:px-6">
-        <p className="text-primary font-black text-sm tracking-widest uppercase mb-3">
-          Studio Showcase
-        </p>
         <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black text-foreground mb-4">
-          Glimpses into our Studio
+          Glimpse into our Studio
         </h2>
       </div>
 

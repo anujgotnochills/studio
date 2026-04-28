@@ -59,10 +59,10 @@ const Reels = () => {
         <p className="text-primary font-black text-sm tracking-widest uppercase mb-3">Our Work</p>
         <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black mb-4">
           <span className="bg-primary text-white px-4 py-1 leading-relaxed rounded-md shadow-md inline-block">
-            Studio Showreel
+            Our Work in Motion
           </span>
         </h2>
-        <p className="text-base md:text-lg text-muted-foreground font-medium">A glimpse into our latest productions</p>
+        <p className="text-base md:text-lg text-muted-foreground font-medium">A glimpse of the stories, brands, and moments we’ve brought to life.</p>
       </div>
 
       <div className="relative w-full overflow-hidden flex flex-col gap-6">

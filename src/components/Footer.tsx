@@ -2,8 +2,7 @@
 
 const socialLinks = [
   { name: "Instagram", href: "https://www.instagram.com/enduranceimage16/" },
-  { name: "Facebook", href: "https://facebook.com" },
-  { name: "WhatsApp", href: "https://wa.me/" },
+  { name: "WhatsApp", href: "https://wa.me/919582156943" },
   { name: "LinkedIn", href: "https://linkedin.com" },
   { name: "YouTube", href: "https://youtube.com" }
 ];
@@ -32,10 +31,10 @@ const Footer = () => {
             {/* Header */}
             <div className="mb-6">
               <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-[42px] font-bold text-white leading-tight mb-2">
-                Let's Create Something Extraordinary Together.
+                Let’s make your brand look unforgettable.
               </h2>
               <p className="text-[#999999] text-[13px] italic">
-                "Hit us up and let's make it happen."
+                Contact us to discuss your requirements.
               </p>
             </div>
 
@@ -62,7 +61,7 @@ const Footer = () => {
                   Our Studio
                 </span>
                 <span className="text-white text-[15px] md:text-[17px]">
-                  New Delhi, India
+                  A-74, 2nd Floor, Sector- 65, Noida- 201301
                 </span>
               </div>
 
@@ -70,8 +69,8 @@ const Footer = () => {
                 <span className="text-[#666666] uppercase text-[10px] font-semibold italic tracking-wider mb-1">
                   Drop Us a Line
                 </span>
-                <a href="mailto:hello@enduranceimage.com" className="text-white text-[15px] md:text-[17px] hover:text-[#a855f7] transition-colors">
-                  hello@enduranceimage.com
+                <a href="mailto:enduranceimage16@gmail.com" className="text-white text-[15px] md:text-[17px] hover:text-[#a855f7] transition-colors">
+                  enduranceimage16@gmail.com
                 </a>
               </div>
 
@@ -79,30 +78,21 @@ const Footer = () => {
                 <span className="text-[#666666] uppercase text-[10px] font-semibold italic tracking-wider mb-1">
                   Phone
                 </span>
-                <a href="tel:+919876543210" className="text-white text-[15px] md:text-[17px] hover:text-[#a855f7] transition-colors">
-                  +91 98765 43210
+                <a href="tel:+919582156943" className="text-white text-[15px] md:text-[17px] hover:text-[#a855f7] transition-colors">
+                  +91 9582156943
                 </a>
-              </div>
-
-              <div className="flex flex-col">
-                <span className="text-[#666666] uppercase text-[10px] font-semibold italic tracking-wider mb-1">
-                  Address
-                </span>
-                <span className="text-white text-[15px] md:text-[17px] max-w-[250px] leading-relaxed">
-                  Greater Noida, Uttar Pradesh, India
-                </span>
               </div>
             </div>
           </div>
 
-          {/* RIGHT COLUMN: Interactive Map Embed (~55% mapped to col-7) */}
-          <div className="lg:col-span-7 w-full h-full min-h-[200px] sm:min-h-[250px] md:min-h-[300px] lg:min-h-[400px] flex items-stretch">
-            <div className="w-full h-full rounded-[12px] overflow-hidden shadow-[0_8px_40px_rgba(0,0,0,0.5)]">
+          {/* RIGHT COLUMN: Interactive Map Embed */}
+          <div className="lg:col-span-7 w-full flex flex-col items-center lg:items-end justify-center py-6">
+            <div className="w-full lg:w-[85%] xl:w-[75%] h-[200px] sm:h-[250px] md:h-[300px] rounded-3xl overflow-hidden shadow-[0_8px_40px_rgba(0,0,0,0.5)] border border-white/10">
               {/* Google Maps iFrame */}
               <iframe 
                 title="Endurance Image Map Location"
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d112173.84497359556!2d77.40182512192087!3d28.49051877689945!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x390cea64b8e8d4f5%3A0x815f9b4f9d0c6eb2!2sGreater%20Noida%2C%20Uttar%20Pradesh!5e0!3m2!1sen!2sin!4v1713000000000!5m2!1sen!2sin" 
-                className="w-full h-[200px] sm:h-[250px] md:h-[300px] lg:h-[400px] border-0 outline-none"
+                src="https://maps.google.com/maps?q=Endurance+Image-+End+to+End+Podcast+Production+Studio&t=&z=14&ie=UTF8&iwloc=&output=embed" 
+                className="w-full h-full border-0 outline-none"
                 allowFullScreen={true} 
                 loading="lazy" 
                 referrerPolicy="no-referrer-when-downgrade"

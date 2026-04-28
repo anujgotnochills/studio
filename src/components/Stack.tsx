@@ -42,7 +42,7 @@ interface StackProps {
   sensitivity?: number;
   cardDimensions?: { width: number; height: number };
   sendToBackOnClick?: boolean;
-  cardsData?: { id: number; img: string }[];
+  cardsData?: { id: number; img: string; link?: string }[];
   animationConfig?: { stiffness: number; damping: number };
 }
 
@@ -120,7 +120,13 @@ export default function Stack({
                 height: cardDimensions.height
               }}
             >
-              <img src={card.img} alt={`card-${card.id}`} className="w-full h-full object-cover pointer-events-none" />
+              {card.link ? (
+                <a href={card.link} target="_blank" rel="noopener noreferrer" className="block w-full h-full pointer-events-auto" onClick={(e) => e.stopPropagation()}>
+                  <img src={card.img} alt={`card-${card.id}`} className="w-full h-full object-cover pointer-events-none" />
+                </a>
+              ) : (
+                <img src={card.img} alt={`card-${card.id}`} className="w-full h-full object-cover pointer-events-none" />
+              )}
             </motion.div>
           </CardRotate>
         );

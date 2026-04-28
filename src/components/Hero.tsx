@@ -28,6 +28,7 @@ export default function Hero() {
       zIndex: 1,
       translateX: -60,
       translateY: 15,
+      link: "https://www.youtube.com/@FounderGyaan",
     },
     {
       id: 2,
@@ -37,6 +38,7 @@ export default function Hero() {
       zIndex: 2,
       translateX: -35,
       translateY: 8,
+      link: "https://www.instagram.com/crowneplazamayurvihar/",
     },
     {
       id: 3,
@@ -46,6 +48,7 @@ export default function Hero() {
       zIndex: 3,
       translateX: -10,
       translateY: 0,
+      link: "https://drive.google.com/drive/folders/1XIHrb8xEgduqRUSBBLcaeuR3aji0BQkp",
     },
     {
       id: 4,
@@ -55,6 +58,7 @@ export default function Hero() {
       zIndex: 4,
       translateX: 15,
       translateY: -8,
+      link: "https://drive.google.com/drive/folders/1xUnCVia7I37FZWHN8JfjDGPu4Dgn7tax?usp=sharing",
     },
     {
       id: 5,
@@ -64,6 +68,7 @@ export default function Hero() {
       zIndex: 5,
       translateX: 40,
       translateY: -15,
+      link: "https://www.instagram.com/theakshayguptaeffect/",
     },
     {
       id: 6,
@@ -219,6 +224,7 @@ export default function Hero() {
                   cardsData={images.map((img) => ({
                     id: img.id,
                     img: img.src,
+                    link: img.link,
                   }))}
                   randomRotation={true}
                   sensitivity={150}
@@ -257,16 +263,31 @@ export default function Hero() {
                       <div
                         className="w-52 h-72 rounded-3xl flex items-center justify-center overflow-hidden shadow-2xl border-4 border-white/50 bg-transparent backdrop-blur-md p-1"
                       >
-                        <img
-                          src={image.src}
-                          alt={image.alt}
-                          width={208}
-                          height={288}
-                          className={`w-full h-full rounded-2xl transition-transform duration-300 object-cover bg-transparent`}
-                          loading={image.id <= 2 ? "eager" : "lazy"}
-                          decoding={image.id <= 2 ? "sync" : "async"}
-                          fetchPriority={image.id === 2 ? "high" : "auto"}
-                        />
+                        {image.link ? (
+                          <a href={image.link} target="_blank" rel="noopener noreferrer" className="block w-full h-full cursor-pointer pointer-events-auto">
+                            <img
+                              src={image.src}
+                              alt={image.alt}
+                              width={208}
+                              height={288}
+                              className={`w-full h-full rounded-2xl transition-transform duration-300 object-cover bg-transparent pointer-events-none`}
+                              loading={image.id <= 2 ? "eager" : "lazy"}
+                              decoding={image.id <= 2 ? "sync" : "async"}
+                              fetchPriority={image.id === 2 ? "high" : "auto"}
+                            />
+                          </a>
+                        ) : (
+                          <img
+                            src={image.src}
+                            alt={image.alt}
+                            width={208}
+                            height={288}
+                            className={`w-full h-full rounded-2xl transition-transform duration-300 object-cover bg-transparent pointer-events-none`}
+                            loading={image.id <= 2 ? "eager" : "lazy"}
+                            decoding={image.id <= 2 ? "sync" : "async"}
+                            fetchPriority={image.id === 2 ? "high" : "auto"}
+                          />
+                        )}
                       </div>
                     </div>
                   ))}

@@ -130,11 +130,11 @@ export default function Team() {
         {/* Header Text Block */}
         <div className="text-center mb-16 shrink-0 relative z-20">
           <h2 className="text-[32px] sm:text-[40px] md:text-[56px] font-bold text-white mb-2 leading-tight relative inline-block">
-            Meet the Team.
+            Meet the Crew.
             <div className="absolute -bottom-2 left-1/2 -translate-x-1/2 w-[60%] h-[4px] rounded-full bg-gradient-to-r from-transparent via-[#a855f7] to-transparent shadow-[0_0_15px_rgba(168,85,247,0.8)] opacity-60"></div>
           </h2>
           <p className="text-[16px] sm:text-[20px] md:text-[24px] mt-4 text-[#999999] dark:text-[#c084fc] font-medium tracking-wide">
-            Smart minds, big hearts.
+            The people who bring every vision to life.
           </p>
         </div>
 

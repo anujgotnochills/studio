@@ -22,9 +22,10 @@ const AboutUs = () => {
               </div>
               
               {/* Floating Badge */}
-              <div className="absolute -bottom-4 -right-4 sm:-bottom-6 sm:-right-6 md:bottom-4 md:-right-8 bg-zinc-900 border-2 border-primary text-white p-3 sm:p-4 rounded-2xl shadow-xl shadow-primary/20 transform hover:-translate-y-2 transition-transform duration-300">
-                <p className="font-black text-sm sm:text-base md:text-lg">Director / Founder</p>
-                <div className="w-8 h-1 bg-primary mt-1 rounded-full"></div>
+              <div className="absolute -bottom-4 -right-4 sm:-bottom-6 sm:-right-6 md:bottom-4 md:-right-8 bg-zinc-900 border-2 border-primary text-white p-3 sm:p-4 rounded-2xl shadow-xl shadow-primary/20 transform hover:-translate-y-2 transition-transform duration-300 text-center">
+                <p className="font-black text-sm sm:text-base md:text-lg">Jyotishman Sarmah</p>
+                <p className="font-bold text-xs sm:text-sm text-primary opacity-90">Founder</p>
+                <div className="w-8 h-1 bg-primary mt-1 rounded-full mx-auto"></div>
               </div>
             </div>
           </div>
@@ -54,15 +55,14 @@ const AboutUs = () => {
             </div>
             
             <div className="mt-8 flex flex-col sm:flex-row gap-4">
-              <button 
-                onClick={() => {
-                  const element = document.getElementById('connect');
-                  element?.scrollIntoView({ behavior: 'smooth' });
-                }}
-                className="px-8 py-4 bg-primary text-white font-bold rounded-full hover:bg-purple-600 hover:scale-105 transition-all shadow-lg shadow-primary/30 flex items-center justify-center gap-2"
+              <a 
+                href="https://wa.me/919582156943"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="px-8 py-4 bg-primary text-white font-bold rounded-full hover:bg-purple-600 hover:scale-105 transition-all shadow-lg shadow-primary/30 inline-flex items-center justify-center gap-2 w-fit"
               >
                 Let's Talk <ArrowRight size={20} />
-              </button>
+              </a>
             </div>
           </div>
 

@@ -1,55 +1,58 @@
-import { Film, Camera, Scissors, Palette, Megaphone, Video } from "lucide-react";
+import { Film, Camera, Scissors, Palette, Megaphone, Video, Settings, Mic2 } from "lucide-react";
 
 const services = [
   {
-    icon: Film,
+    title: "Line Production",
+    description:
+      "End-to-end shoot planning and on-ground production support, from locations, crew, schedules, permits, and equipment to hiring/casting actors, models, and talent for your project.",
+    icon: Settings,
+    color: "#a855f7",
+  },
+  {
     title: "Video Production",
     description:
-      "From concept to screen — cinematic storytelling with professional crews, equipment, and direction.",
+      "Professional video production for brands, creators, events, podcasts, campaigns, and digital platforms — handled from concept to final shoot.",
+    icon: Film,
+    color: "#a855f7",
   },
   {
-    icon: Camera,
     title: "Photography",
     description:
-      "Editorial, product, and event photography that captures the essence of your brand.",
+      "High-quality photography for products, events, interiors, campaigns, corporate profiles, and branded content with a clean, polished visual style.",
+    icon: Camera,
+    color: "#a855f7",
   },
   {
-    icon: Scissors,
-    title: "Post-Production",
-    description:
-      "Color grading, VFX, sound design, and editing that transforms raw footage into art.",
-  },
-  {
-    icon: Palette,
     title: "Creative Direction",
     description:
-      "Strategic visual planning that aligns every frame with your brand identity and goals.",
+      "Visual planning, concept development, moodboarding, styling guidance, and shoot direction to make every project look aligned and impactful.",
+    icon: Palette,
+    color: "#a855f7",
   },
   {
-    icon: Megaphone,
-    title: "Brand Content",
+    title: "Studio Production",
     description:
-      "Social media reels, ad films, and branded content optimized for engagement and reach.",
+      "Professional in-house studio setup for podcasts, creators, interviews, brand shoots, and social media content with premium lighting and sound.",
+    icon: Mic2,
+    color: "#a855f7",
   },
   {
-    icon: Video,
-    title: "Live Event Coverage",
+    title: "Post-Production",
     description:
-      "Multi-camera setups, live streaming, and same-day edits for conferences, launches, and more.",
+      "Editing, color correction, sound design, graphics, reels, and final delivery that turn raw footage into sharp, ready-to-use content",
+    icon: Scissors,
+    color: "#a855f7",
   },
 ];
 
 export default function Services() {
   return (
-    <section id="services" className="py-16 md:py-24 px-4 md:px-6 bg-transparent">
-      <div className="max-w-[95%] md:max-w-[85%] lg:max-w-[80%] mx-auto">
+    <section id="services" className="relative py-24 bg-transparent z-10 overflow-hidden">
+      <div className="relative z-10 w-full max-w-[95%] md:max-w-[85%] lg:max-w-[80%] mx-auto px-4 md:px-6">
         {/* Header */}
         <div className="text-center mb-16">
-          <p className="text-primary font-black text-sm tracking-widest uppercase mb-3">
-            What We Do
-          </p>
           <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black text-foreground mb-4">
-            Our Services
+            What we do?
           </h2>
           <p className="text-base md:text-lg text-muted-foreground font-medium max-w-2xl mx-auto">
             We bring your vision to life with end-to-end creative solutions
