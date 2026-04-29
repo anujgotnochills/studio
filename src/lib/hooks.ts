@@ -57,8 +57,33 @@ export interface Testimonial {
   company: string;
   quote: string;
   image_url: string;
+  video_url?: string;
   rating: number;
   display_order: number;
+}
+
+const VIDEO_QUOTE_TOKEN_REGEX = /\[\[video_url:(.*?)\]\]/;
+
+function extractVideoFromQuote(quote: string) {
+  const match = quote.match(VIDEO_QUOTE_TOKEN_REGEX);
+  const videoUrl = match?.[1]?.trim() || '';
+  const cleanQuote = quote.replace(VIDEO_QUOTE_TOKEN_REGEX, '').trim();
+  return { cleanQuote, videoUrl };
+}
+
+/** YouTube ID from shorts, watch, embed, or youtu.be URL — for embeds on the site */
+export function extractYoutubeVideoId(url: string): string | null {
+  const patterns = [
+    /youtube\.com\/shorts\/([^?&/]+)/,
+    /youtu\.be\/([^?&/]+)/,
+    /youtube\.com\/watch\?v=([^?&/]+)/,
+    /youtube\.com\/embed\/([^?&/]+)/,
+  ];
+  for (const pattern of patterns) {
+    const match = url.match(pattern);
+    if (match) return match[1];
+  }
+  return null;
 }
 
 const defaultTestimonials: Testimonial[] = [
@@ -84,7 +109,17 @@ export function useTestimonials() {
         .select('*')
         .order('display_order', { ascending: true });
       if (error) throw error;
-      if (testimonials && testimonials.length > 0) setData(testimonials);
+      if (testimonials && testimonials.length > 0) {
+        const normalizedTestimonials = testimonials.map((testimonial) => {
+          const { cleanQuote, videoUrl } = extractVideoFromQuote(testimonial.quote || '');
+          return {
+            ...testimonial,
+            quote: cleanQuote,
+            video_url: testimonial.video_url || videoUrl || '',
+          };
+        });
+        setData(normalizedTestimonials);
+      }
     } catch {
       console.warn('Using default testimonials');
     } finally {

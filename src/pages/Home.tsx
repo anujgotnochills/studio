@@ -3,8 +3,6 @@ import Hero from "../components/Hero";
 import LazySection from "../components/LazySection";
 import { usePartnerLogos } from "@/lib/hooks";
 
-// Trigger HMR update to clear stale MacBook cache
-
 // Lazy load heavy components for code splitting
 const ContainerScrollDemo = lazy(() => import("../components/ContainerScrollDemo"));
 const LogoLoop = lazy(() => import("../components/LogoLoop"));
@@ -40,7 +38,7 @@ function Home() {
         {/* Hero — studio intro */}
         <Hero />
 
-        {/* Showreel — MacBook video */}
+        {/* Showreel */}
         <div id="showreel" className="relative z-20">
           <LazySection preloadDistance={300} threshold={0.1}>
             <Suspense fallback={<LoadingFallback />}>
