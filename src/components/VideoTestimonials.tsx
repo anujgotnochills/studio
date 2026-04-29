@@ -1,5 +1,5 @@
 
-import { useMemo } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { cn } from "@/lib/utils";
 import { useTestimonials, extractYoutubeVideoId } from "@/lib/hooks";
 
@@ -50,6 +50,10 @@ function youtubeEmbedSrc(videoId: string) {
   return `https://www.youtube-nocookie.com/embed/${videoId}?${q.toString()}`;
 }
 
+function youtubeThumb(videoId: string) {
+  return `https://img.youtube.com/vi/${videoId}/hqdefault.jpg`;
+}
+
 /** Fills parent; scales/crops iframe edges to hide typical Shorts title/channel bar + bottom watermark */
 function YoutubePreviewOnly({ videoId }: { videoId: string }) {
   return (
@@ -93,13 +97,36 @@ function ClipPlayer({ url }: { url: string }) {
   );
 }
 
+function ClipPreviewImage({ url }: { url: string }) {
+  const ytId = extractYoutubeVideoId(url);
+  if (ytId) {
+    return (
+      <img
+        src={youtubeThumb(ytId)}
+        alt="Testimonial video preview"
+        className="w-full h-full object-cover"
+        loading="lazy"
+        decoding="async"
+      />
+    );
+  }
+
+  return (
+    <div className="absolute inset-0 flex items-center justify-center bg-gradient-to-br from-zinc-900 to-zinc-700 text-white/80 text-xs font-medium">
+      Video Preview
+    </div>
+  );
+}
+
 function VideoClipCard({
   url,
   className,
+  isMobile,
   rotation = "rotate-0",
 }: {
   url: string;
   className?: string;
+  isMobile: boolean;
   rotation?: string;
 }) {
   return (
@@ -111,13 +138,21 @@ function VideoClipCard({
         className
       )}
     >
-      <ClipPlayer url={url} />
+      {isMobile ? <ClipPreviewImage url={url} /> : <ClipPlayer url={url} />}
     </div>
   );
 }
 
 export default function VideoTestimonials() {
   const { data: testimonials } = useTestimonials();
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const onResize = () => setIsMobile(window.innerWidth < 768);
+    onResize();
+    window.addEventListener("resize", onResize);
+    return () => window.removeEventListener("resize", onResize);
+  }, []);
 
   /** Up to 10 dashboard video URLs, same order as Testimonials Manager */
   const dashboardSources = useMemo(() => {
@@ -159,6 +194,7 @@ export default function VideoTestimonials() {
               <VideoClipCard
                 key={`left-a-${i}`}
                 url={sources[i % sources.length]}
+                isMobile={isMobile}
                 rotation={slot.rotation}
                 className={slot.className}
               />
@@ -169,6 +205,7 @@ export default function VideoTestimonials() {
               <VideoClipCard
                 key={`left-b-${i}`}
                 url={sources[(i + 2) % sources.length]}
+                isMobile={isMobile}
                 rotation={slot.rotation}
                 className={slot.className}
               />
@@ -179,6 +216,7 @@ export default function VideoTestimonials() {
               <VideoClipCard
                 key={`left-c-${i}`}
                 url={sources[(i + 4) % sources.length]}
+                isMobile={isMobile}
                 rotation={slot.rotation}
                 className={slot.className}
               />
@@ -209,6 +247,7 @@ export default function VideoTestimonials() {
               <VideoClipCard
                 key={`right-a-${i}`}
                 url={sources[(i + 6) % sources.length]}
+                isMobile={isMobile}
                 rotation={slot.rotation}
                 className={slot.className}
               />
@@ -219,6 +258,7 @@ export default function VideoTestimonials() {
               <VideoClipCard
                 key={`right-b-${i}`}
                 url={sources[(i + 8) % sources.length]}
+                isMobile={isMobile}
                 rotation={slot.rotation}
                 className={slot.className}
               />
@@ -229,6 +269,7 @@ export default function VideoTestimonials() {
               <VideoClipCard
                 key={`right-c-${i}`}
                 url={sources[(i + 10) % sources.length]}
+                isMobile={isMobile}
                 rotation={slot.rotation}
                 className={slot.className}
               />

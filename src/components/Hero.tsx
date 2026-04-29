@@ -8,6 +8,7 @@ export default function Hero() {
   const [isVisible, setIsVisible] = useState(false);
   const [isSpread, setIsSpread] = useState(false);
   const [isImageHovered, setIsImageHovered] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
 
   // Defer hero visibility and LightRays to reduce initial load
@@ -17,6 +18,13 @@ export default function Hero() {
       setIsVisible(true);
     }, 100);
     return () => clearTimeout(timer);
+  }, []);
+
+  useEffect(() => {
+    const updateDevice = () => setIsMobile(window.innerWidth < 1024);
+    updateDevice();
+    window.addEventListener("resize", updateDevice);
+    return () => window.removeEventListener("resize", updateDevice);
   }, []);
 
   const images = [
@@ -162,7 +170,7 @@ export default function Hero() {
       style={{ paddingBottom: "4rem" }}
     >
       {/* LightRays Background - Deferred to reduce initial load */}
-      {isVisible && (
+      {isVisible && !isMobile && (
         <LightRays
           raysOrigin="top-center"
           raysColor="#a855f7"
@@ -191,28 +199,40 @@ export default function Hero() {
             {/* Main Heading in 2 Lines */}
             <div className="w-full md:w-[85%] mx-auto mt-6 md:mt-12 lg:mt-16 mb-4 flex flex-col items-center">
               <div className="w-full">
-                <TextPressure
-                  text="We CAPTURE what Matters."
-                  flex={true}
-                  alpha={false}
-                  stroke={false}
-                  width={true}
-                  weight={true}
-                  italic={true}
-                  textColor="currentColor"
-                  className="text-foreground"
-                  minFontSize={20}
-                />
+                {isMobile ? (
+                  <h1 className="text-3xl sm:text-4xl font-extrabold text-foreground">
+                    We CAPTURE what Matters.
+                  </h1>
+                ) : (
+                  <TextPressure
+                    text="We CAPTURE what Matters."
+                    flex={true}
+                    alpha={false}
+                    stroke={false}
+                    width={true}
+                    weight={true}
+                    italic={true}
+                    textColor="currentColor"
+                    className="text-foreground"
+                    minFontSize={20}
+                  />
+                )}
               </div>
             </div>
 
             {/* Shiny Subtitle */}
             <div className="mb-8">
-              <ShinyText
-                text="End-to-end production, from concept to final edit."
-                speed={3}
-                className="text-base md:text-lg lg:text-xl text-white dark:text-white font-medium"
-              />
+              {isMobile ? (
+                <p className="text-base md:text-lg lg:text-xl text-white dark:text-white font-medium">
+                  End-to-end production, from concept to final edit.
+                </p>
+              ) : (
+                <ShinyText
+                  text="End-to-end production, from concept to final edit."
+                  speed={3}
+                  className="text-base md:text-lg lg:text-xl text-white dark:text-white font-medium"
+                />
+              )}
             </div>
 
             {/* Image Gallery - Mobile Stack / Desktop Fanned Gallery */}
@@ -221,7 +241,7 @@ export default function Hero() {
               <div className="lg:hidden flex justify-center mb-8">
                 <Stack
                   cardDimensions={{ width: 220, height: 220 }}
-                  cardsData={images.map((img) => ({
+                  cardsData={images.slice(0, 4).map((img) => ({
                     id: img.id,
                     img: img.src,
                     link: img.link,

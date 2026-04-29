@@ -1,4 +1,4 @@
-import { Suspense, lazy } from "react";
+import { Suspense, lazy, useEffect, useState } from "react";
 import Hero from "../components/Hero";
 import LazySection from "../components/LazySection";
 import { usePartnerLogos } from "@/lib/hooks";
@@ -31,6 +31,14 @@ const LoadingFallback = () => (
 function Home() {
   const { data: partnerLogos } = usePartnerLogos();
   const studioLogos = partnerLogos.map(l => ({ src: l.image_url, alt: l.name }));
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const onResize = () => setIsMobile(window.innerWidth < 768);
+    onResize();
+    window.addEventListener("resize", onResize);
+    return () => window.removeEventListener("resize", onResize);
+  }, []);
 
   return (
     <div className="min-h-screen bg-transparent relative overflow-x-hidden">
@@ -60,7 +68,7 @@ function Home() {
                 logos={studioLogos}
                 speed={50}
                 direction="left"
-                logoHeight={160}
+                logoHeight={isMobile ? 72 : 140}
                 gap={24}
                 fadeOut
                 fadeOutColor="#0d0d0d"
