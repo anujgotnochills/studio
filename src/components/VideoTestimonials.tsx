@@ -1,7 +1,7 @@
-
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useRef } from "react";
 import { cn } from "@/lib/utils";
 import { useTestimonials, extractYoutubeVideoId } from "@/lib/hooks";
+import YoutubeLazyPlayer from "@/components/YoutubeLazyPlayer";
 
 const FALLBACK_MP4_SOURCES = [
   "https://www.w3schools.com/html/mov_bbb.mp4",
@@ -28,44 +28,39 @@ function isDirectVideoFileUrl(url: string) {
   return /\.(mp4|webm|ogg)(\?.*)?$/i.test(url) || /^\/[^?]+\.(mp4|webm|ogg)/i.test(url);
 }
 
-function youtubeEmbedSrc(videoId: string) {
-  const q = new URLSearchParams({
-    autoplay: '1',
-    mute: '1',
-    loop: '1',
-    playlist: videoId,
-    controls: '0',
-    modestbranding: '1',
-    playsinline: '1',
-    rel: '0',
-    iv_load_policy: '3',
-    cc_load_policy: '0',
-    fs: '0',
-    disablekb: '1',
-  });
-  if (typeof window !== 'undefined' && window.location?.origin) {
-    q.set('origin', window.location.origin);
-  }
-  // nocookie embed + max params to strip UI; top/bottom cropped in wrapper (YouTube draws some chrome in-frame)
-  return `https://www.youtube-nocookie.com/embed/${videoId}?${q.toString()}`;
-}
+function LazyMp4Player({ url }: { url: string }) {
+  const wrapRef = useRef<HTMLDivElement>(null);
+  const videoRef = useRef<HTMLVideoElement>(null);
 
-function youtubeThumb(videoId: string) {
-  return `https://img.youtube.com/vi/${videoId}/hqdefault.jpg`;
-}
+  useEffect(() => {
+    const root = wrapRef.current;
+    const v = videoRef.current;
+    if (!root || !v) return;
 
-/** Fills parent; scales/crops iframe edges to hide typical Shorts title/channel bar + bottom watermark */
-function YoutubePreviewOnly({ videoId }: { videoId: string }) {
+    const io = new IntersectionObserver(
+      ([e]) => {
+        if (!e) return;
+        if (e.isIntersecting) void v.play();
+        else v.pause();
+      },
+      { threshold: 0.12, rootMargin: "100px 0px" }
+    );
+    io.observe(root);
+    return () => io.disconnect();
+  }, []);
+
   return (
-    <div className="absolute inset-0 overflow-hidden bg-black">
-      <iframe
-        src={youtubeEmbedSrc(videoId)}
-        title="Testimonial preview"
-        aria-label="Testimonial video preview"
-        loading="lazy"
-        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-        className="pointer-events-none border-0 absolute left-1/2 top-[52%] min-h-[132%] min-w-[132%] w-[132%] max-w-none -translate-x-1/2 -translate-y-1/2"
-      />
+    <div ref={wrapRef} className="absolute inset-0">
+      <video
+        ref={videoRef}
+        className="h-full w-full object-cover"
+        muted
+        loop
+        playsInline
+        preload="metadata"
+      >
+        <source src={url} />
+      </video>
     </div>
   );
 }
@@ -74,15 +69,11 @@ function ClipPlayer({ url }: { url: string }) {
   const ytId = extractYoutubeVideoId(url);
 
   if (ytId) {
-    return <YoutubePreviewOnly videoId={ytId} />;
+    return <YoutubeLazyPlayer videoId={ytId} />;
   }
 
   if (isDirectVideoFileUrl(url)) {
-    return (
-      <video className="w-full h-full object-cover" autoPlay muted loop playsInline>
-        <source src={url} />
-      </video>
-    );
+    return <LazyMp4Player url={url} />;
   }
 
   return (
@@ -97,62 +88,41 @@ function ClipPlayer({ url }: { url: string }) {
   );
 }
 
-function ClipPreviewImage({ url }: { url: string }) {
-  const ytId = extractYoutubeVideoId(url);
-  if (ytId) {
-    return (
-      <img
-        src={youtubeThumb(ytId)}
-        alt="Testimonial video preview"
-        className="w-full h-full object-cover"
-        loading="lazy"
-        decoding="async"
-      />
-    );
-  }
-
-  return (
-    <div className="absolute inset-0 flex items-center justify-center bg-gradient-to-br from-zinc-900 to-zinc-700 text-white/80 text-xs font-medium">
-      Video Preview
-    </div>
-  );
+/** Uniform grid tiles on small screens — widths come from grid, not fixed w-32/w-40 tokens. */
+function mobileBandCardClass() {
+  return "w-full aspect-[10/13] max-h-[168px] sm:max-h-[190px] !max-w-none";
 }
 
 function VideoClipCard({
   url,
   className,
-  isMobile,
   rotation = "rotate-0",
 }: {
   url: string;
   className?: string;
-  isMobile: boolean;
   rotation?: string;
 }) {
   return (
-    <div
+    <a
+      href={url}
+      target="_blank"
+      rel="noopener noreferrer"
       className={cn(
-        "relative overflow-hidden rounded-2xl md:rounded-3xl shadow-xl transition-all duration-500 ease-out border border-white/5 bg-black/40",
+        "group relative overflow-hidden rounded-2xl md:rounded-3xl shadow-xl transition-all duration-500 ease-out border border-white/5 bg-black/40 block",
         "hover:scale-105 hover:rotate-0 hover:z-20",
         rotation,
         className
       )}
+      aria-label="Open testimonial video in new tab"
     >
-      {isMobile ? <ClipPreviewImage url={url} /> : <ClipPlayer url={url} />}
-    </div>
+      <ClipPlayer url={url} />
+      <div className="pointer-events-none absolute inset-0 z-[2] opacity-0 transition-opacity duration-300 group-hover:opacity-100 bg-black/25" />
+    </a>
   );
 }
 
 export default function VideoTestimonials() {
   const { data: testimonials } = useTestimonials();
-  const [isMobile, setIsMobile] = useState(false);
-
-  useEffect(() => {
-    const onResize = () => setIsMobile(window.innerWidth < 768);
-    onResize();
-    window.addEventListener("resize", onResize);
-    return () => window.removeEventListener("resize", onResize);
-  }, []);
 
   /** Up to 10 dashboard video URLs, same order as Testimonials Manager */
   const dashboardSources = useMemo(() => {
@@ -166,27 +136,61 @@ export default function VideoTestimonials() {
   const sources =
     dashboardSources.length > 0 ? dashboardSources : FALLBACK_MP4_SOURCES;
 
+  const urlAt = (i: number) => sources[i % sources.length];
+
   return (
-    <section className="relative w-full py-16 md:py-24 overflow-hidden bg-transparent z-10 flex flex-col items-center">
+    <section className="relative w-full pt-2 pb-16 sm:pt-4 md:pt-10 md:pb-24 xl:pt-16 xl:pb-24 overflow-hidden bg-transparent z-10 flex flex-col items-center">
       <div className="absolute inset-0 bg-gradient-to-b from-transparent via-[#1a0a2e]/20 to-transparent pointer-events-none" />
 
-      <div className="relative w-full max-w-[95%] md:max-w-[90%] mx-auto flex flex-col xl:flex-row items-center justify-between gap-8 md:gap-12 xl:gap-8">
-        {/* Mobile / tablet heading */}
-        <div className="xl:hidden flex flex-col items-center text-center mt-8">
-          <span className="px-4 py-1.5 rounded-full bg-white/10 text-white/80 text-sm font-semibold mb-6 border border-white/10 shadow-sm backdrop-blur-sm">
+      <div className="relative w-full max-w-[95%] md:max-w-[90%] mx-auto">
+        {/* Tablet / mobile: media → copy → media (desktop keeps 3-column layout below) */}
+        <div className="xl:hidden flex flex-col items-center gap-6 md:gap-8 w-full mt-0">
+          {/* Pill sits between preceding section (e.g. Team) and first clip grid */}
+          <span className="px-6 py-2.5 rounded-full bg-primary text-white text-base font-bold border border-primary/60 shadow-md backdrop-blur-sm">
             Testimonials
           </span>
-          <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold text-white tracking-tight mb-2">
-            Trusted by Brands,
-          </h2>
-          <h3 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-white/50 tracking-tight mb-6 md:mb-8">
-            Creators & Businesses
-          </h3>
-          <p className="text-sm sm:text-base md:text-lg text-white/60 max-w-md mx-auto font-medium">
-            Hear from the clients who trusted us with their stories.
-          </p>
+          {/* 3×2 grid — avoids ragged flex-wrap rows and duplicate-looking singles */}
+          <div className="grid w-full grid-cols-3 gap-x-3 gap-y-4 sm:gap-x-4 sm:gap-y-5 max-w-md mx-auto">
+            {[0, 1, 2, 3, 4, 5].map((slotIdx) => {
+              const slot = SLOT_LAYOUT[slotIdx];
+              return (
+              <VideoClipCard
+                key={`mob-top-${slotIdx}`}
+                url={urlAt(slotIdx)}
+                rotation={slot.rotation}
+                className={mobileBandCardClass()}
+              />
+              );
+            })}
+          </div>
+          <div className="flex flex-col items-center text-center px-2">
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black text-white tracking-tight mb-2">
+              Trusted by Brands,
+            </h2>
+            <h3 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-white/50 tracking-tight mb-6 md:mb-8">
+              Creators & Businesses
+            </h3>
+            <p className="text-sm sm:text-base md:text-lg text-white/60 max-w-md mx-auto font-medium">
+              Hear from the clients who trusted us with their stories.
+            </p>
+          </div>
+          <div className="grid w-full grid-cols-3 gap-x-3 gap-y-4 sm:gap-x-4 sm:gap-y-5 max-w-md mx-auto">
+            {[0, 1, 2, 3, 4, 5].map((slotIdx) => {
+              const slot = SLOT_LAYOUT[slotIdx + 6];
+              return (
+              <VideoClipCard
+                key={`mob-bottom-${slotIdx}`}
+                url={urlAt(slotIdx + 6)}
+                rotation={slot.rotation}
+                className={mobileBandCardClass()}
+              />
+              );
+            })}
+          </div>
         </div>
 
+        {/* Desktop: left clips | center copy | right clips */}
+        <div className="hidden xl:flex flex-row items-center justify-between gap-8 md:gap-12 xl:gap-8 w-full mt-16 xl:mt-0">
         {/* LEFT cluster */}
         <div className="w-full xl:w-[35%] flex flex-wrap xl:flex-nowrap justify-center xl:justify-end gap-4 md:gap-6 lg:gap-8">
           <div className="flex flex-col gap-4 md:gap-6 mt-0 xl:-mt-12">
@@ -194,7 +198,6 @@ export default function VideoTestimonials() {
               <VideoClipCard
                 key={`left-a-${i}`}
                 url={sources[i % sources.length]}
-                isMobile={isMobile}
                 rotation={slot.rotation}
                 className={slot.className}
               />
@@ -205,7 +208,6 @@ export default function VideoTestimonials() {
               <VideoClipCard
                 key={`left-b-${i}`}
                 url={sources[(i + 2) % sources.length]}
-                isMobile={isMobile}
                 rotation={slot.rotation}
                 className={slot.className}
               />
@@ -216,7 +218,6 @@ export default function VideoTestimonials() {
               <VideoClipCard
                 key={`left-c-${i}`}
                 url={sources[(i + 4) % sources.length]}
-                isMobile={isMobile}
                 rotation={slot.rotation}
                 className={slot.className}
               />
@@ -225,11 +226,11 @@ export default function VideoTestimonials() {
         </div>
 
         {/* Desktop center copy */}
-        <div className="hidden xl:flex flex-col items-center text-center w-[30%] z-10 px-4">
-          <span className="px-5 py-2 rounded-full bg-white/10 text-white/90 text-sm font-bold mb-8 border border-white/10 shadow-lg backdrop-blur-md transition-transform hover:scale-105">
+        <div className="flex flex-col items-center text-center w-[30%] z-10 px-4">
+          <span className="px-7 py-3 rounded-full bg-primary text-white text-base font-bold mb-8 border border-primary/60 shadow-lg backdrop-blur-md transition-transform hover:scale-105">
             Testimonials
           </span>
-          <h2 className="text-5xl lg:text-6xl font-black text-white tracking-tight mb-2 leading-none">
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black text-white tracking-tight mb-2 leading-none">
             Trusted by Brands,
           </h2>
           <h3 className="text-4xl lg:text-5xl font-bold text-white/50 tracking-tight mb-8 leading-none">
@@ -247,7 +248,6 @@ export default function VideoTestimonials() {
               <VideoClipCard
                 key={`right-a-${i}`}
                 url={sources[(i + 6) % sources.length]}
-                isMobile={isMobile}
                 rotation={slot.rotation}
                 className={slot.className}
               />
@@ -258,7 +258,6 @@ export default function VideoTestimonials() {
               <VideoClipCard
                 key={`right-b-${i}`}
                 url={sources[(i + 8) % sources.length]}
-                isMobile={isMobile}
                 rotation={slot.rotation}
                 className={slot.className}
               />
@@ -269,12 +268,12 @@ export default function VideoTestimonials() {
               <VideoClipCard
                 key={`right-c-${i}`}
                 url={sources[(i + 10) % sources.length]}
-                isMobile={isMobile}
                 rotation={slot.rotation}
                 className={slot.className}
               />
             ))}
           </div>
+        </div>
         </div>
       </div>
     </section>

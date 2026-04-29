@@ -10,6 +10,7 @@ export default function Hero() {
   const [isImageHovered, setIsImageHovered] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
+  const headingText = isMobile ? "WE CAPTURE WHAT MATTERS." : "We CAPTURE what Matters.";
 
   // Defer hero visibility and LightRays to reduce initial load
   useEffect(() => {
@@ -91,7 +92,7 @@ export default function Hero() {
 
   // Memoize card calculations - updated for centered hover spacing
   const cardCalculations = useMemo(() => {
-    const cardWidth = 208; // w-52 = 208px
+    const cardWidth = 240; // w-60 = 240px
     const totalCards = images.length;
     // Spacing offset set to card width + 16px gap
     const spacingOffset = cardWidth + 16; 
@@ -166,23 +167,22 @@ export default function Hero() {
 
   return (
     <section
-      className="relative bg-transparent overflow-x-hidden"
-      style={{ paddingBottom: "4rem" }}
+      className="relative bg-transparent overflow-x-hidden pb-8 md:pb-14 lg:pb-16"
     >
       {/* LightRays Background - Deferred to reduce initial load */}
-      {isVisible && !isMobile && (
+      {isVisible && (
         <LightRays
           raysOrigin="top-center"
           raysColor="#a855f7"
-          raysSpeed={1.5}
-          lightSpread={1.5}
-          rayLength={1.2}
+          raysSpeed={isMobile ? 1.9 : 1.5}
+          lightSpread={isMobile ? 2.4 : 1.7}
+          rayLength={isMobile ? 2.0 : 1.35}
           pulsating={false}
-          fadeDistance={1.6}
-          saturation={1}
-          followMouse={true}
-          mouseInfluence={0.25}
-          noiseAmount={0.05}
+          fadeDistance={isMobile ? 2.4 : 1.6}
+          saturation={isMobile ? 1.15 : 1.05}
+          followMouse={!isMobile}
+          mouseInfluence={isMobile ? 0 : 0.25}
+          noiseAmount={isMobile ? 0.04 : 0.05}
           distortion={0}
           className="z-0"
         />
@@ -198,25 +198,19 @@ export default function Hero() {
           <div className="h-full flex flex-col items-center justify-center text-center pt-10">
             {/* Main Heading in 2 Lines */}
             <div className="w-full md:w-[85%] mx-auto mt-6 md:mt-12 lg:mt-16 mb-4 flex flex-col items-center">
-              <div className="w-full">
-                {isMobile ? (
-                  <h1 className="text-3xl sm:text-4xl font-extrabold text-foreground">
-                    We CAPTURE what Matters.
-                  </h1>
-                ) : (
-                  <TextPressure
-                    text="We CAPTURE what Matters."
-                    flex={true}
-                    alpha={false}
-                    stroke={false}
-                    width={true}
-                    weight={true}
-                    italic={true}
-                    textColor="currentColor"
-                    className="text-foreground"
-                    minFontSize={20}
-                  />
-                )}
+              <div className="w-full px-2 sm:px-0">
+                <TextPressure
+                  text={headingText}
+                  flex={!isMobile}
+                  alpha={false}
+                  stroke={false}
+                  width={true}
+                  weight={true}
+                  italic={true}
+                  textColor="currentColor"
+                  className="text-foreground whitespace-nowrap"
+                  minFontSize={isMobile ? 12 : 20}
+                />
               </div>
             </div>
 
@@ -240,7 +234,7 @@ export default function Hero() {
               {/* Mobile Stack Component */}
               <div className="lg:hidden flex justify-center mb-8">
                 <Stack
-                  cardDimensions={{ width: 220, height: 220 }}
+                  cardDimensions={{ width: 270, height: 270 }}
                   cardsData={images.slice(0, 4).map((img) => ({
                     id: img.id,
                     img: img.src,
@@ -256,7 +250,7 @@ export default function Hero() {
               <div className="hidden lg:block relative w-full">
                 <div
                   ref={containerRef}
-                  className="relative h-[450px] w-full max-w-[1800px] flex items-center justify-center group mx-auto -mt-8"
+                  className="relative h-[500px] w-full max-w-[1800px] flex items-center justify-center group mx-auto -mt-8"
                   style={{
                     zIndex: isImageHovered ? 20 : 10,
                   }}
@@ -281,15 +275,15 @@ export default function Hero() {
                     >
                       {/* Image Container */}
                       <div
-                        className="w-52 h-72 rounded-3xl flex items-center justify-center overflow-hidden shadow-2xl border-4 border-white/50 bg-transparent backdrop-blur-md p-1"
+                        className="w-60 h-80 rounded-3xl flex items-center justify-center overflow-hidden shadow-2xl border-4 border-white/50 bg-transparent backdrop-blur-md p-1"
                       >
                         {image.link ? (
                           <a href={image.link} target="_blank" rel="noopener noreferrer" className="block w-full h-full cursor-pointer pointer-events-auto">
                             <img
                               src={image.src}
                               alt={image.alt}
-                              width={208}
-                              height={288}
+                              width={240}
+                              height={320}
                               className={`w-full h-full rounded-2xl transition-transform duration-300 object-cover bg-transparent pointer-events-none`}
                               loading={image.id <= 2 ? "eager" : "lazy"}
                               decoding={image.id <= 2 ? "sync" : "async"}
@@ -300,8 +294,8 @@ export default function Hero() {
                           <img
                             src={image.src}
                             alt={image.alt}
-                            width={208}
-                            height={288}
+                            width={240}
+                            height={320}
                             className={`w-full h-full rounded-2xl transition-transform duration-300 object-cover bg-transparent pointer-events-none`}
                             loading={image.id <= 2 ? "eager" : "lazy"}
                             decoding={image.id <= 2 ? "sync" : "async"}

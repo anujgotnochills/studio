@@ -1,11 +1,11 @@
-import { Film, Camera, Scissors, Palette, Megaphone, Video, Settings, Mic2 } from "lucide-react";
+import { Film, Camera, Scissors, Video, Clapperboard, Mic } from "lucide-react";
 
 const services = [
   {
     title: "Line Production",
     description:
       "End-to-end shoot planning and on-ground production support, from locations, crew, schedules, permits, and equipment to hiring/casting actors, models, and talent for your project.",
-    icon: Settings,
+    icon: Clapperboard,
     color: "#a855f7",
   },
   {
@@ -26,14 +26,14 @@ const services = [
     title: "Creative Direction",
     description:
       "Visual planning, concept development, moodboarding, styling guidance, and shoot direction to make every project look aligned and impactful.",
-    icon: Palette,
+    icon: Video,
     color: "#a855f7",
   },
   {
     title: "Studio Production",
     description:
       "Professional in-house studio setup for podcasts, creators, interviews, brand shoots, and social media content with premium lighting and sound.",
-    icon: Mic2,
+    icon: Mic,
     color: "#a855f7",
   },
   {
@@ -47,11 +47,11 @@ const services = [
 
 export default function Services() {
   return (
-    <section id="services" className="relative py-24 bg-transparent z-10 overflow-hidden">
+    <section id="services" className="relative pt-6 pb-6 sm:pt-10 sm:pb-14 md:py-24 bg-transparent z-10 overflow-hidden">
       <div className="relative z-10 w-full max-w-[95%] md:max-w-[85%] lg:max-w-[80%] mx-auto px-4 md:px-6">
         {/* Header */}
-        <div className="text-center mb-16">
-          <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black text-foreground mb-4">
+        <div className="text-center mb-8 md:mb-16">
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black text-foreground mb-3 md:mb-4">
             What we do?
           </h2>
           <p className="text-base md:text-lg text-muted-foreground font-medium max-w-2xl mx-auto">

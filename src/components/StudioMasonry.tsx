@@ -13,7 +13,7 @@ export default function StudioMasonry() {
     return () => window.removeEventListener('resize', checkMobile);
   }, []);
 
-  const displayedPhotos = isMobile ? studioPhotos.slice(0, 8) : studioPhotos;
+  const displayedPhotos = isMobile ? studioPhotos.slice(0, 9) : studioPhotos;
 
   const masonryItems: MasonryItem[] = displayedPhotos.map(p => ({
     id: p.id,
@@ -23,8 +23,8 @@ export default function StudioMasonry() {
   }));
 
   return (
-    <section className="relative w-full py-12 md:py-20 px-3 sm:px-4 md:px-8 bg-transparent overflow-hidden">
-      <div className="text-center mb-10 md:mb-16 relative z-10 px-4 md:px-6">
+    <section className="relative w-full pt-5 pb-1 md:py-20 px-3 sm:px-4 md:px-8 bg-transparent overflow-hidden">
+      <div className="text-center mb-4 md:mb-16 relative z-10 px-4 md:px-6">
         <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black text-foreground mb-4">
           Glimpse into our Studio
         </h2>

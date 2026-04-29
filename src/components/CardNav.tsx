@@ -48,7 +48,7 @@ const CardNav: React.FC<CardNavProps> = ({ items, className = "" }) => {
     >
       <nav
         className={cn(
-          "relative flex items-center justify-between w-full md:w-[90%] lg:w-[85%] xl:w-[80%] mx-auto h-14 md:h-16 px-4 md:px-6 transition-all duration-300",
+          "relative flex items-center justify-between w-full md:w-[90%] lg:w-[85%] xl:w-[80%] mx-auto min-h-[3.75rem] h-auto py-2.5 md:py-0 md:h-16 px-4 md:px-6 transition-all duration-300",
           scrolled
             ? "bg-black/80 backdrop-blur-xl border border-border/50 rounded-full shadow-lg"
             : "bg-transparent"
@@ -60,20 +60,20 @@ const CardNav: React.FC<CardNavProps> = ({ items, className = "" }) => {
             <img
               src="/main logo.png"
               alt="Endurance Image Logo"
-              className="w-8 h-8 md:w-10 md:h-10 rounded-lg object-contain group-hover:scale-110 transition-transform"
+              className="w-11 h-11 sm:w-12 sm:h-12 md:w-[3.35rem] md:h-[3.35rem] rounded-lg object-contain group-hover:scale-110 transition-transform"
             />
             <div className="flex flex-col justify-center items-start text-left">
               <Shuffle
                 text="ENDURANCE"
                 tag="span"
-                className="font-black tracking-tight text-[12px] sm:text-[13px] md:text-[15px] text-white leading-[1.1]"
+                className="font-black tracking-tight text-[12px] sm:text-[13px] md:text-[14px] lg:text-[15px] text-white leading-[1.1]"
                 duration={0.5}
                 shuffleTimes={2}
               />
               <Shuffle
                 text="IMAGE"
                 tag="span"
-                className="font-black tracking-tight text-[12px] sm:text-[13px] md:text-[15px] text-white leading-[1.1]"
+                className="font-black tracking-tight text-[12px] sm:text-[13px] md:text-[14px] lg:text-[15px] text-white leading-[1.1]"
                 duration={0.5}
                 shuffleTimes={2}
               />
@@ -111,7 +111,7 @@ const CardNav: React.FC<CardNavProps> = ({ items, className = "" }) => {
             rel="noopener noreferrer"
             className="hidden sm:inline-flex items-center justify-center px-5 md:px-6 h-10 md:h-11 rounded-full bg-primary text-[12px] md:text-[13px] font-black text-primary-foreground hover:scale-105 active:scale-95 transition-all shadow-lg shadow-primary/20"
           >
-            Connect
+            Lets Connect
           </a>
           
           <button
@@ -150,7 +150,7 @@ const CardNav: React.FC<CardNavProps> = ({ items, className = "" }) => {
               onClick={() => setIsOpen(false)}
               className="w-full flex items-center justify-center h-14 rounded-2xl bg-primary text-sm font-black text-primary-foreground shadow-xl shadow-primary/20"
             >
-              Connect
+              Lets Connect
             </a>
           </div>
         </div>

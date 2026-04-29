@@ -32,8 +32,8 @@ function App() {
 
   const navigationItems = [
     { label: "Our Services", href: "/#services" },
-    { label: "Our Work", href: "/#portfolio" },
     { label: "Studio", href: "/#studio" },
+    { label: "Our Work", href: "/#portfolio" },
     { label: "About Us", href: "/#about" },
     { label: "Testimonials", href: "/#testimonials" },
   ];

@@ -1,10 +1,10 @@
-
+import { SOCIAL_URLS } from "@/lib/social";
 
 const socialLinks = [
-  { name: "Instagram", href: "https://www.instagram.com/enduranceimage16/" },
-  { name: "WhatsApp", href: "https://wa.me/919582156943" },
-  { name: "LinkedIn", href: "https://linkedin.com" },
-  { name: "YouTube", href: "https://youtube.com" }
+  { name: "WhatsApp", href: SOCIAL_URLS.whatsapp },
+  { name: "Instagram", href: SOCIAL_URLS.instagram },
+  { name: "LinkedIn", href: SOCIAL_URLS.linkedin },
+  { name: "YouTube", href: SOCIAL_URLS.youtube },
 ];
 
 const Footer = () => {
@@ -23,30 +23,30 @@ const Footer = () => {
 
       {/* Main Grid Container — Note generous 80px side padding requested for larger screens */}
       <div className="relative z-10 w-full max-w-[1600px] mx-auto px-6 md:px-12 pb-12 md:pb-16">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-center">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 lg:items-start">
           
           {/* LEFT COLUMN: Contact / Social (~45% implicitly mapped to col-5 via grid mapping) */}
-          <div className="lg:col-span-5 flex flex-col justify-center">
+          <div className="lg:col-span-5 flex flex-col lg:justify-start">
             
             {/* Header */}
             <div className="mb-6">
               <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-[42px] font-bold text-white leading-tight mb-2">
-                Let’s make your brand look unforgettable.
+                Let’s make your brand look <span className="text-primary">unforgettable.</span>
               </h2>
-              <p className="text-[#999999] text-[13px] italic">
+              <p className="text-[#999999] text-[16px] md:text-[18px] italic">
                 Contact us to discuss your requirements.
               </p>
             </div>
 
-            {/* Social Pills */}
-            <div className="flex flex-wrap gap-2 mb-8">
+            {/* Social pills — aligned row / wrap; LinkedIn & YouTube use SOCIAL_URLS */}
+            <div className="flex flex-wrap items-center gap-2 sm:gap-2.5 mb-8">
               {socialLinks.map((social) => (
                 <a
                   key={social.name}
                   href={social.href}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="px-3 py-1 rounded-full border border-white/20 text-white text-[12px] bg-transparent transition-all duration-300 hover:border-[#a855f7] hover:text-[#a855f7]"
+                  className="inline-flex min-h-[2.125rem] items-center justify-center rounded-full border border-white/20 bg-transparent px-3.5 py-1.5 text-center text-[12px] font-medium leading-none text-white antialiased transition-all duration-300 hover:border-primary hover:text-primary"
                 >
                   {social.name}
                 </a>
@@ -57,28 +57,28 @@ const Footer = () => {
             <div className="flex flex-col gap-6">
               
               <div className="flex flex-col">
-                <span className="text-[#666666] uppercase text-[10px] font-semibold italic tracking-wider mb-1">
+                <span className="text-[#666666] uppercase text-xs md:text-sm font-semibold italic tracking-wider mb-1.5">
                   Our Studio
                 </span>
-                <span className="text-white text-[15px] md:text-[17px]">
+                <span className="text-white text-[18px] md:text-[22px] font-semibold">
                   A-74, 2nd Floor, Sector- 65, Noida- 201301
                 </span>
               </div>
 
               <div className="flex flex-col">
-                <span className="text-[#666666] uppercase text-[10px] font-semibold italic tracking-wider mb-1">
-                  Drop Us a Line
+                <span className="text-[#666666] uppercase text-xs md:text-sm font-semibold italic tracking-wider mb-1.5">
+                  Email Us
                 </span>
-                <a href="mailto:enduranceimage16@gmail.com" className="text-white text-[15px] md:text-[17px] hover:text-[#a855f7] transition-colors">
+                <a href="mailto:enduranceimage16@gmail.com" className="text-white text-[18px] md:text-[22px] font-semibold hover:text-[#a855f7] transition-colors">
                   enduranceimage16@gmail.com
                 </a>
               </div>
 
               <div className="flex flex-col">
-                <span className="text-[#666666] uppercase text-[10px] font-semibold italic tracking-wider mb-1">
+                <span className="text-[#666666] uppercase text-xs md:text-sm font-semibold italic tracking-wider mb-1.5">
                   Phone
                 </span>
-                <a href="tel:+919582156943" className="text-white text-[15px] md:text-[17px] hover:text-[#a855f7] transition-colors">
+                <a href="tel:+919582156943" className="text-white text-[18px] md:text-[22px] font-semibold hover:text-[#a855f7] transition-colors">
                   +91 9582156943
                 </a>
               </div>
@@ -86,7 +86,7 @@ const Footer = () => {
           </div>
 
           {/* RIGHT COLUMN: Interactive Map Embed */}
-          <div className="lg:col-span-7 w-full flex flex-col items-center lg:items-end justify-center py-6">
+          <div className="lg:col-span-7 w-full flex flex-col items-center lg:items-end justify-start -mt-2 sm:-mt-1 lg:mt-0 lg:-translate-y-1">
             <div className="w-full lg:w-[85%] xl:w-[75%] h-[200px] sm:h-[250px] md:h-[300px] rounded-3xl overflow-hidden shadow-[0_8px_40px_rgba(0,0,0,0.5)] border border-white/10">
               {/* Google Maps iFrame */}
               <iframe 

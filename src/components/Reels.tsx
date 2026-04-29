@@ -1,5 +1,6 @@
 import { useRef } from 'react';
 import { useReels } from '@/lib/hooks';
+import YoutubeLazyPlayer from '@/components/YoutubeLazyPlayer';
 
 interface Reel {
   id: string;
@@ -14,20 +15,14 @@ const ReelCard = ({ reel }: { reel: Reel }) => (
     href={reel.youtubeUrl}
     target="_blank"
     rel="noopener noreferrer"
-    className="group relative flex-shrink-0 w-44 sm:w-60 md:w-64 h-[320px] sm:h-[426px] md:h-[455px] rounded-2xl sm:rounded-3xl overflow-hidden shadow-xl bg-black block"
+    className="group relative block h-[320px] w-44 shrink-0 overflow-hidden rounded-2xl bg-black shadow-xl sm:h-[426px] sm:w-60 md:h-[455px] md:w-64 sm:rounded-3xl"
     style={{ margin: '0 6px' }}
   >
     {/* Phone-frame border */}
     <div className="absolute inset-0 rounded-3xl ring-2 ring-white/10 z-10 pointer-events-none" />
 
-    {/* Autoplay muted iframe */}
-    <iframe
-      src={`https://www.youtube.com/embed/${reel.videoId}?autoplay=1&mute=1&loop=1&playlist=${reel.videoId}&controls=0&modestbranding=1&playsinline=1&rel=0&showinfo=0`}
-      allow="autoplay; encrypted-media"
-      allowFullScreen
-      className="w-full h-full pointer-events-none"
-      title={reel.title}
-    />
+    {/* Poster loads first; muted autoplay embed when card enters view */}
+    <YoutubeLazyPlayer videoId={reel.videoId} />
 
     {/* Hover overlay — click to open full video */}
     <div className="absolute inset-0 bg-black/0 group-hover:bg-black/30 transition-all duration-300 flex items-center justify-center z-20">
@@ -56,11 +51,8 @@ const Reels = () => {
   return (
     <section id="portfolio" className="relative py-20 bg-background overflow-hidden">
       <div className="max-w-[95%] md:max-w-[85%] lg:max-w-[80%] mx-auto px-4 md:px-6 mb-8 md:mb-12 text-center">
-        <p className="text-primary font-black text-sm tracking-widest uppercase mb-3">Our Work</p>
         <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black mb-4">
-          <span className="bg-primary text-white px-4 py-1 leading-relaxed rounded-md shadow-md inline-block">
-            Our Work in Motion
-          </span>
+          Our Work in Motion
         </h2>
         <p className="text-base md:text-lg text-muted-foreground font-medium">A glimpse of the stories, brands, and moments we’ve brought to life.</p>
       </div>

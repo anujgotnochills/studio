@@ -1,4 +1,5 @@
-import { Instagram } from 'lucide-react';
+import { Instagram } from "lucide-react";
+import { SOCIAL_URLS } from "@/lib/social";
 
 const WhatsAppIcon = () => (
   <svg className="w-6 h-6 sm:w-7 sm:h-7" viewBox="0 0 24 24" fill="white" xmlns="http://www.w3.org/2000/svg">
@@ -11,48 +12,41 @@ export default function FloatingChat() {
   return (
     <div
       style={{
-        position: 'fixed',
-        bottom: '24px',
-        right: '24px',
+        position: "fixed",
+        bottom: "24px",
+        right: "24px",
         zIndex: 9999,
-        pointerEvents: 'auto'
+        pointerEvents: "auto",
       }}
       className="flex flex-col gap-3 sm:gap-4"
     >
-      {/* WhatsApp Button */}
       <a
-        href="https://wa.me/919582156943"
+        href={SOCIAL_URLS.whatsapp}
         target="_blank"
         rel="noopener noreferrer"
-        className="relative w-12 h-12 sm:w-14 sm:h-14 bg-gradient-to-br from-green-500 to-green-600 rounded-full shadow-lg shadow-green-500/50 flex items-center justify-center hover:scale-110 transition-transform duration-300 group"
+        className="relative flex h-12 w-12 items-center justify-center rounded-full bg-gradient-to-br from-green-500 to-green-600 shadow-lg shadow-green-500/50 transition-transform duration-300 hover:scale-110 sm:h-14 sm:w-14 group"
         title="Chat on WhatsApp"
         aria-label="Chat on WhatsApp"
       >
         <WhatsAppIcon />
-        {/* Continuous highlighting pulse effect */}
-        <div className="absolute inset-0 rounded-full bg-green-500/40 animate-pulse -z-10 scale-110 group-hover:scale-125 transition-transform duration-300"></div>
-        <div className="absolute inset-0 rounded-full bg-green-500/20 animate-ping -z-10 opacity-40"></div>
+        <div className="absolute inset-0 -z-10 scale-110 rounded-full bg-green-500/40 animate-pulse group-hover:scale-125 transition-transform duration-300" />
+        <div className="absolute inset-0 -z-10 rounded-full bg-green-500/20 animate-ping opacity-40" />
       </a>
 
-      {/* Instagram Button */}
       <a
-        href="https://www.instagram.com/enduranceimage16/"
+        href={SOCIAL_URLS.instagram}
         target="_blank"
         rel="noopener noreferrer"
-        className="relative w-12 h-12 sm:w-14 sm:h-14 rounded-full shadow-xl shadow-[#E1306C]/30 flex items-center justify-center group hover:scale-110 transition-transform duration-300"
+        className="relative flex h-12 w-12 items-center justify-center rounded-full shadow-xl shadow-[#E1306C]/30 transition-transform duration-300 hover:scale-110 group sm:h-14 sm:w-14"
+        style={{
+          background: "linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%)",
+          zIndex: 10000,
+        }}
         title="Follow us on Instagram"
         aria-label="Follow us on Instagram"
-        style={{
-          background: 'linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%)',
-          zIndex: 10000
-        }}
       >
-        <Instagram
-          size={20}
-          className="text-white relative z-10 sm:w-6 sm:h-6"
-        />
-        {/* Subtle Pulse animation matching WhatsApp vibe but distinct */}
-        <div className="absolute inset-0 rounded-full bg-[#E1306C]/20 opacity-0 group-hover:animate-ping"></div>
+        <Instagram size={20} className="relative z-10 text-white sm:h-6 sm:w-6" />
+        <div className="absolute inset-0 rounded-full bg-[#E1306C]/20 opacity-0 transition-opacity group-hover:animate-ping" />
       </a>
     </div>
   );

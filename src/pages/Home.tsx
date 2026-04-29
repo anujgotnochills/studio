@@ -56,10 +56,10 @@ function Home() {
         </div>
 
         {/* Partners Marquee — Logo Loop */}
-        <section className="py-6 sm:py-10 md:py-14 relative z-10 overflow-hidden">
+        <section className="pt-4 pb-5 sm:pt-7 sm:pb-8 md:py-14 relative z-10 overflow-hidden">
           <LazySection preloadDistance={300} threshold={0.1}>
-            <div className="max-w-[95%] md:max-w-[85%] lg:max-w-[80%] mx-auto px-4 md:px-6 mb-6 md:mb-8 text-center">
-              <h2 className="text-2xl sm:text-3xl md:text-4xl font-black text-foreground mb-0">
+            <div className="max-w-[95%] md:max-w-[85%] lg:max-w-[80%] mx-auto px-4 md:px-6 mb-4 md:mb-8 text-center">
+              <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black text-foreground mb-4">
                 Brands that Trust us
               </h2>
             </div>
@@ -90,13 +90,24 @@ function Home() {
           </LazySection>
         </div>
 
-        {/* Curved marquee between Services and Reels */}
+        {/* Curved stats marquee (same SVG arc as desktop on all breakpoints) */}
         <LazySection preloadDistance={300} threshold={0.1}>
-          <Suspense fallback={<LoadingFallback />}>
-            <div className="py-6 md:py-10 px-4 md:px-6">
-              <CurvedLoop marqueeText={"SINCE 2019 | 100+ BRANDS SERVED | 5000+ VIDEOS DELIVERED"} speed={3.0} curveAmount={180} direction="left" />
-            </div>
-          </Suspense>
+          <section
+            className="relative px-4 md:px-6 pt-2 pb-0 md:pt-10 md:pb-8"
+            aria-label="Studio stats"
+          >
+            <Suspense
+              fallback={
+                <div className="min-h-[280px] w-full flex items-center justify-center py-8">
+                  <div className="animate-pulse text-muted-foreground text-sm font-medium">
+                    Loading...
+                  </div>
+                </div>
+              }
+            >
+              <CurvedLoop marqueeText={"SINCE 2019 | 100+ BRANDS SERVED | 5000+ VIDEOS DELIVERED |"} speed={3.0} curveAmount={180} direction="left" />
+            </Suspense>
+          </section>
         </LazySection>
 
         {/* Studio Showcase — Masonry Gallery */}

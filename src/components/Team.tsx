@@ -49,7 +49,7 @@ const teamMembers: TeamMember[] = [
 const TeamCard = ({ member }: { member: TeamMember }) => {
   return (
     <div 
-      className="relative flex flex-col items-center w-[280px] sm:w-[280px] md:w-[260px] lg:w-[280px] xl:w-[320px] h-[380px] sm:h-[420px] lg:h-[500px] xl:h-[550px] shrink-0 group team-anim-card opacity-0 translate-y-12 transition-all duration-[800ms] ease-out will-change-[opacity,transform] rounded-3xl overflow-hidden cursor-pointer"
+      className="relative flex flex-col items-center w-[190px] h-[248px] shrink-0 snap-center sm:w-[210px] sm:h-[268px] md:w-full md:max-w-[320px] md:h-[360px] lg:h-[500px] xl:h-[550px] group team-anim-card opacity-0 translate-y-12 transition-all duration-[800ms] ease-out will-change-[opacity,transform] rounded-2xl md:rounded-3xl overflow-hidden cursor-pointer"
     >
       {/* Character Image */}
       <img
@@ -60,17 +60,17 @@ const TeamCard = ({ member }: { member: TeamMember }) => {
 
       {/* Always Visible Name Gradient (Fades out slightly on hover) */}
       <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-100 transition-opacity duration-300 group-hover:opacity-0 pointer-events-none" />
-      <div className="absolute bottom-6 left-0 right-0 text-center transition-all duration-300 group-hover:translate-y-8 group-hover:opacity-0 pointer-events-none">
-        <h4 className="text-white font-black text-2xl tracking-wide drop-shadow-md">
+      <div className="absolute bottom-3 md:bottom-6 left-0 right-0 text-center transition-all duration-300 group-hover:translate-y-8 group-hover:opacity-0 pointer-events-none px-1">
+        <h4 className="text-white font-black text-base sm:text-lg md:text-2xl tracking-wide drop-shadow-md">
           {member.name}
         </h4>
       </div>
 
       {/* Glass Overlay on Hover */}
-      <div className="absolute inset-0 bg-black/40 backdrop-blur-md opacity-0 group-hover:opacity-100 transition-all duration-500 ease-in-out flex flex-col justify-center items-center p-8 text-center" />
+      <div className="absolute inset-0 bg-black/40 backdrop-blur-md opacity-0 group-hover:opacity-100 transition-all duration-500 ease-in-out flex flex-col justify-center items-center p-4 md:p-8 text-center" />
 
       {/* Content inside Glass Component */}
-      <div className="absolute inset-0 flex flex-col justify-center items-center p-8 text-center opacity-0 group-hover:opacity-100 transition-all duration-500 delay-100 translate-y-8 group-hover:translate-y-0 text-white">
+      <div className="absolute inset-0 flex flex-col justify-center items-center p-4 md:p-8 text-center opacity-0 group-hover:opacity-100 transition-all duration-500 delay-100 translate-y-8 group-hover:translate-y-0 text-white">
         <p className="text-[14px] md:text-[16px] lg:text-[18px] leading-relaxed font-semibold italic mb-4 md:mb-6">
           "{member.quote}"
         </p>
@@ -123,13 +123,13 @@ export default function Team() {
   return (
     <section 
       ref={sectionRef} 
-      className="relative w-full min-h-[auto] md:min-h-screen bg-[#0d0d0d] py-16 md:py-[100px] flex flex-col items-center overflow-hidden z-10 box-border"
+      className="relative w-full min-h-[auto] md:min-h-screen bg-[#0d0d0d] pt-16 pb-6 md:pt-[100px] md:pb-12 flex flex-col items-center overflow-visible md:overflow-hidden z-10 box-border"
     >
       <div className="relative z-10 w-full max-w-[1400px] mx-auto px-4 md:px-8 flex flex-col items-center">
         
         {/* Header Text Block */}
-        <div className="text-center mb-16 shrink-0 relative z-20">
-          <h2 className="text-[32px] sm:text-[40px] md:text-[56px] font-bold text-white mb-2 leading-tight relative inline-block">
+        <div className="text-center mb-8 md:mb-16 shrink-0 relative z-20">
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black text-white mb-2 leading-tight relative inline-block">
             Meet the Crew.
             <div className="absolute -bottom-2 left-1/2 -translate-x-1/2 w-[60%] h-[4px] rounded-full bg-gradient-to-r from-transparent via-[#a855f7] to-transparent shadow-[0_0_15px_rgba(168,85,247,0.8)] opacity-60"></div>
           </h2>
@@ -138,8 +138,24 @@ export default function Team() {
           </p>
         </div>
 
-        {/* Horizontal Team Layout */}
-        <div className="w-full grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 justify-items-center gap-4 sm:gap-6 md:gap-8 mt-8">
+        {/* Mobile: horizontal scroll · md+: grid */}
+        <div
+          className="
+            mt-6 md:mt-8 w-full max-w-full
+            flex flex-nowrap md:grid
+            items-stretch
+            gap-3 sm:gap-4 md:gap-8
+            overflow-x-auto md:overflow-visible
+            overscroll-x-contain touch-pan-x
+            snap-x snap-mandatory md:snap-none
+            scroll-pl-4 scroll-pr-6 md:scroll-pl-0 md:scroll-pr-0
+            -mx-4 px-4 md:mx-0 md:px-0
+            pb-1 md:pb-0
+            justify-start
+            md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 md:justify-items-center
+            [scrollbar-width:thin]
+          "
+        >
           {teamMembers.map((member) => (
             <TeamCard key={member.id} member={member} />
           ))}
