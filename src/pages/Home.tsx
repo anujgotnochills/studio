@@ -56,7 +56,7 @@ function Home() {
         </div>
 
         {/* Partners Marquee — Logo Loop */}
-        <section className="smooth-transition pt-4 pb-5 sm:pt-7 sm:pb-8 md:py-14 relative z-10 overflow-hidden">
+        <section className="smooth-transition pt-4 pb-5 sm:pt-7 sm:pb-8 md:py-14 lg:pt-8 lg:pb-6 relative z-10 overflow-hidden">
           <LazySection preloadDistance={300} threshold={0.1}>
             <div className="max-w-[95%] md:max-w-[85%] lg:max-w-[80%] mx-auto px-4 md:px-6 mb-4 md:mb-8 text-center">
               <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black text-foreground mb-4">
@@ -93,7 +93,7 @@ function Home() {
         {/* Curved stats marquee (same SVG arc as desktop on all breakpoints) */}
         <LazySection preloadDistance={300} threshold={0.1}>
           <section
-            className="smooth-transition relative px-4 md:px-6 pt-2 pb-0 md:pt-10 md:pb-8"
+            className="smooth-transition relative px-4 md:px-6 pt-2 pb-0 md:pt-10 md:pb-8 lg:pt-2 lg:pb-0 lg:-mb-10"
             aria-label="Studio stats"
           >
             <Suspense

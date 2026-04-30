@@ -47,7 +47,7 @@ const services = [
 
 export default function Services() {
   return (
-    <section id="services" className="relative pt-6 pb-6 sm:pt-10 sm:pb-14 md:py-24 bg-transparent z-10 overflow-hidden">
+    <section id="services" className="relative pt-6 pb-6 sm:pt-10 sm:pb-14 md:py-24 lg:pt-12 lg:pb-16 bg-transparent z-10 overflow-hidden">
       <div className="relative z-10 w-full max-w-[95%] md:max-w-[85%] lg:max-w-[80%] mx-auto px-4 md:px-6">
         {/* Header */}
         <div className="text-center mb-8 md:mb-16">

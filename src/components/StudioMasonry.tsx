@@ -23,8 +23,8 @@ export default function StudioMasonry() {
   }));
 
   return (
-    <section className="relative w-full pt-1 pb-1 md:py-20 px-3 sm:px-4 md:px-8 bg-transparent overflow-hidden">
-      <div className="text-center mb-3 md:mb-16 relative z-10 px-4 md:px-6">
+    <section className="relative w-full pt-1 pb-1 md:py-20 lg:pt-2 lg:pb-4 px-3 sm:px-4 md:px-8 bg-transparent overflow-hidden">
+      <div className="text-center mb-3 md:mb-16 lg:mb-6 relative z-10 px-4 md:px-6">
         <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black text-foreground mb-4">
           Glimpse into our Studio
         </h2>

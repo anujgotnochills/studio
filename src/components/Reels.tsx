@@ -49,7 +49,7 @@ const Reels = () => {
   const doubled = [...reels, ...reels, ...reels];
 
   return (
-    <section id="portfolio" className="relative py-20 bg-background overflow-hidden">
+    <section id="portfolio" className="relative py-20 lg:pt-8 lg:pb-14 bg-background overflow-hidden">
       <div className="max-w-[95%] md:max-w-[85%] lg:max-w-[80%] mx-auto px-4 md:px-6 mb-8 md:mb-12 text-center">
         <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black mb-4">
           Our Work in Motion

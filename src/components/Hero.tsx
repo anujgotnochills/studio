@@ -92,9 +92,9 @@ export default function Hero() {
 
   // Memoize card calculations - tuned for desktop viewport fit
   const cardCalculations = useMemo(() => {
-    const cardWidth = 176; // desktop card footprint
+    const cardWidth = 192; // desktop card footprint
     const totalCards = images.length;
-    const spacingOffset = 186;
+    const spacingOffset = 198;
     const totalWidth = (totalCards - 1) * spacingOffset;
     const startX = -totalWidth / 2; // Center properly
 
@@ -274,15 +274,15 @@ export default function Hero() {
                     >
                       {/* Image Container */}
                       <div
-                        className="w-44 h-64 xl:w-48 xl:h-72 rounded-3xl flex items-center justify-center overflow-hidden shadow-2xl border-4 border-white/50 bg-transparent backdrop-blur-md p-1"
+                        className="w-48 h-72 xl:w-52 xl:h-80 rounded-3xl flex items-center justify-center overflow-hidden shadow-2xl border-4 border-white/50 bg-transparent backdrop-blur-md p-1"
                       >
                         {image.link ? (
                           <a href={image.link} target="_blank" rel="noopener noreferrer" className="block w-full h-full cursor-pointer pointer-events-auto">
                             <img
                               src={image.src}
                               alt={image.alt}
-                              width={176}
-                              height={256}
+                              width={192}
+                              height={288}
                               className={`w-full h-full rounded-2xl transition-transform duration-300 object-cover bg-transparent pointer-events-none`}
                               loading={image.id <= 2 ? "eager" : "lazy"}
                               decoding={image.id <= 2 ? "sync" : "async"}
@@ -293,8 +293,8 @@ export default function Hero() {
                           <img
                             src={image.src}
                             alt={image.alt}
-                            width={176}
-                            height={256}
+                            width={192}
+                            height={288}
                             className={`w-full h-full rounded-2xl transition-transform duration-300 object-cover bg-transparent pointer-events-none`}
                             loading={image.id <= 2 ? "eager" : "lazy"}
                             decoding={image.id <= 2 ? "sync" : "async"}

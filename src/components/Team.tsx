@@ -123,7 +123,7 @@ export default function Team() {
   return (
     <section 
       ref={sectionRef} 
-      className="relative w-full min-h-[auto] md:min-h-screen bg-[#0d0d0d] pt-10 pb-6 md:pt-[100px] md:pb-12 flex flex-col items-center overflow-visible md:overflow-hidden z-10 box-border"
+      className="relative w-full min-h-[auto] md:min-h-screen bg-[#0d0d0d] pt-10 pb-6 md:pt-[100px] lg:pt-14 md:pb-12 flex flex-col items-center overflow-visible md:overflow-hidden z-10 box-border"
     >
       <div className="relative z-10 w-full max-w-[1400px] mx-auto px-4 md:px-8 flex flex-col items-center">
         
