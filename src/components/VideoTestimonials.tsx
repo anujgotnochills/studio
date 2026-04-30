@@ -139,51 +139,39 @@ export default function VideoTestimonials() {
   const urlAt = (i: number) => sources[i % sources.length];
 
   return (
-    <section className="relative w-full pt-2 pb-16 sm:pt-4 md:pt-10 md:pb-24 xl:pt-16 xl:pb-24 overflow-hidden bg-transparent z-10 flex flex-col items-center">
+    <section className="relative w-full pt-8 pb-16 sm:pt-6 md:pt-10 md:pb-24 xl:pt-16 xl:pb-24 overflow-hidden bg-transparent z-10 flex flex-col items-center">
       <div className="absolute inset-0 bg-gradient-to-b from-transparent via-[#1a0a2e]/20 to-transparent pointer-events-none" />
 
       <div className="relative w-full max-w-[95%] md:max-w-[90%] mx-auto">
-        {/* Tablet / mobile: media → copy → media (desktop keeps 3-column layout below) */}
+        {/* Tablet / mobile: all copy first, then all videos (desktop keeps 3-column layout below) */}
         <div className="xl:hidden flex flex-col items-center gap-6 md:gap-8 w-full mt-0">
-          {/* Pill sits between preceding section (e.g. Team) and first clip grid */}
+          {/* Copy block */}
           <span className="px-6 py-2.5 rounded-full bg-primary text-white text-base font-bold border border-primary/60 shadow-md backdrop-blur-sm">
             Testimonials
           </span>
-          {/* 3×2 grid — avoids ragged flex-wrap rows and duplicate-looking singles */}
-          <div className="grid w-full grid-cols-3 gap-x-3 gap-y-4 sm:gap-x-4 sm:gap-y-5 max-w-md mx-auto">
-            {[0, 1, 2, 3, 4, 5].map((slotIdx) => {
-              const slot = SLOT_LAYOUT[slotIdx];
-              return (
-              <VideoClipCard
-                key={`mob-top-${slotIdx}`}
-                url={urlAt(slotIdx)}
-                rotation={slot.rotation}
-                className={mobileBandCardClass()}
-              />
-              );
-            })}
-          </div>
-          <div className="flex flex-col items-center text-center px-2">
-            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black text-white tracking-tight mb-2">
+          <div className="my-1 flex flex-col items-center text-center px-2">
+            <h2 className="text-3xl sm:text-4xl font-black text-white tracking-tight leading-tight mb-1">
               Trusted by Brands,
             </h2>
-            <h3 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-white/50 tracking-tight mb-6 md:mb-8">
+            <h3 className="text-2xl sm:text-3xl md:text-4xl font-bold text-white/50 tracking-tight leading-tight mb-2">
               Creators & Businesses
             </h3>
-            <p className="text-sm sm:text-base md:text-lg text-white/60 max-w-md mx-auto font-medium">
+            <p className="text-sm sm:text-base text-white/60 max-w-md mx-auto text-center font-medium">
               Hear from the clients who trusted us with their stories.
             </p>
           </div>
-          <div className="grid w-full grid-cols-3 gap-x-3 gap-y-4 sm:gap-x-4 sm:gap-y-5 max-w-md mx-auto">
-            {[0, 1, 2, 3, 4, 5].map((slotIdx) => {
-              const slot = SLOT_LAYOUT[slotIdx + 6];
+
+          {/* Videos block: all 8 videos below copy */}
+          <div className="mt-3 grid w-full grid-cols-2 gap-x-3 gap-y-4 sm:gap-x-4 sm:gap-y-5 max-w-sm mx-auto">
+            {[0, 1, 2, 3, 4, 5, 6, 7].map((slotIdx) => {
+              const slot = SLOT_LAYOUT[slotIdx];
               return (
-              <VideoClipCard
-                key={`mob-bottom-${slotIdx}`}
-                url={urlAt(slotIdx + 6)}
-                rotation={slot.rotation}
-                className={mobileBandCardClass()}
-              />
+                <VideoClipCard
+                  key={`mob-all-${slotIdx}`}
+                  url={urlAt(slotIdx)}
+                  rotation={slot.rotation}
+                  className={mobileBandCardClass()}
+                />
               );
             })}
           </div>

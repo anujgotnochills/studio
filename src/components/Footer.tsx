@@ -30,7 +30,7 @@ const Footer = () => {
             
             {/* Header */}
             <div className="mb-6">
-              <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-[42px] font-bold text-white leading-tight mb-2">
+              <h2 className="text-[2rem] sm:text-3xl md:text-4xl lg:text-[42px] font-bold text-white leading-tight mb-2">
                 Let’s make your brand look <span className="text-primary">unforgettable.</span>
               </h2>
               <p className="text-[#999999] text-[16px] md:text-[18px] italic">
@@ -54,13 +54,13 @@ const Footer = () => {
             </div>
 
             {/* Contact Details Stack */}
-            <div className="contact-info flex flex-col gap-3">
+            <div className="contact-info flex flex-col gap-0 md:gap-3">
               
-              <div className="contact-item flex flex-col m-0 p-0">
+              <div className="contact-item flex flex-col m-0 p-0 mb-6 md:mb-0">
                 <span className="contact-label text-[#666666] uppercase text-xs md:text-sm font-semibold italic tracking-wider mb-1.5 leading-none">
                   Our Studio
                 </span>
-                <span className="contact-value m-0 p-0 text-white text-[18px] md:text-[22px] font-semibold leading-tight">
+                <span className="contact-value m-0 p-0 text-white text-[16px] md:text-[22px] font-semibold leading-tight">
                   A-74, 2nd Floor, Sector- 65, Noida- 201301
                 </span>
               </div>
@@ -69,16 +69,16 @@ const Footer = () => {
                 <span className="contact-label text-[#666666] uppercase text-xs md:text-sm font-semibold italic tracking-wider mb-1.5 leading-none">
                   Email Us
                 </span>
-                <a href="mailto:enduranceimage16@gmail.com" className="contact-value m-0 p-0 text-white text-[18px] md:text-[22px] font-semibold leading-tight hover:text-[#a855f7] transition-colors">
+                <a href="mailto:enduranceimage16@gmail.com" className="contact-value m-0 p-0 text-white text-[16px] md:text-[22px] font-semibold leading-tight hover:text-[#a855f7] transition-colors">
                   enduranceimage16@gmail.com
                 </a>
               </div>
 
-              <div className="contact-item flex flex-col m-0 p-0">
+              <div className="contact-item flex flex-col m-0 p-0 md:mt-0">
                 <span className="contact-label text-[#666666] uppercase text-xs md:text-sm font-semibold italic tracking-wider mb-1.5 leading-none">
-                  Phone
+                  Contact Us
                 </span>
-                <a href="tel:+919582156943" className="contact-value m-0 p-0 text-white text-[18px] md:text-[22px] font-semibold leading-tight hover:text-[#a855f7] transition-colors">
+                <a href="tel:+919582156943" className="contact-value m-0 p-0 text-white text-[16px] md:text-[22px] font-semibold leading-tight hover:text-[#a855f7] transition-colors">
                   +91 9582156943
                 </a>
               </div>
@@ -86,7 +86,7 @@ const Footer = () => {
           </div>
 
           {/* RIGHT COLUMN: Interactive Map Embed */}
-          <div className="lg:col-span-7 w-full flex flex-col items-center lg:items-end justify-start -mt-2 sm:-mt-1 lg:mt-0 lg:-translate-y-1">
+          <div className="lg:col-span-7 w-full flex flex-col items-center lg:items-end justify-start -mt-6 sm:-mt-1 lg:mt-0 lg:-translate-y-1">
             <div className="relative w-full lg:w-[85%] xl:w-[75%] h-[200px] sm:h-[250px] md:h-[300px] rounded-3xl overflow-hidden shadow-[0_8px_40px_rgba(0,0,0,0.5)] border border-white/10">
               <a
                 href="https://www.google.com/maps/search/?api=1&query=Endurance+Image,+A-74,+2nd+Floor,+Sector+65,+Noida+201301"
