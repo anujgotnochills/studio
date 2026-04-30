@@ -25,17 +25,21 @@ function thumbUrl(videoId: string) {
   return `https://i.ytimg.com/vi/${videoId}/mqdefault.jpg`;
 }
 
-type Props = { videoId: string };
+type Props = {
+  videoId: string;
+  autoplayEmbed?: boolean;
+};
 
 /**
  * Fast poster (JPEG) first; when the card nears the viewport, mount a muted autoplay embed.
  * pointer-events-none on iframe so parent links still work.
  */
-export default function YoutubeLazyPlayer({ videoId }: Props) {
+export default function YoutubeLazyPlayer({ videoId, autoplayEmbed = true }: Props) {
   const rootRef = useRef<HTMLDivElement>(null);
   const [showEmbed, setShowEmbed] = useState(false);
 
   useEffect(() => {
+    if (!autoplayEmbed) return;
     const root = rootRef.current;
     if (!root) return;
 
@@ -52,7 +56,7 @@ export default function YoutubeLazyPlayer({ videoId }: Props) {
 
     io.observe(root);
     return () => io.disconnect();
-  }, []);
+  }, [autoplayEmbed]);
 
   return (
     <div ref={rootRef} className="absolute inset-0 overflow-hidden bg-black">
@@ -68,7 +72,7 @@ export default function YoutubeLazyPlayer({ videoId }: Props) {
         decoding="async"
         fetchPriority="low"
       />
-      {showEmbed && (
+      {autoplayEmbed && showEmbed && (
         <iframe
           title="Video preview"
           src={embedSrc(videoId)}

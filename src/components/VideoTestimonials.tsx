@@ -69,7 +69,7 @@ function ClipPlayer({ url }: { url: string }) {
   const ytId = extractYoutubeVideoId(url);
 
   if (ytId) {
-    return <YoutubeLazyPlayer videoId={ytId} />;
+    return <YoutubeLazyPlayer videoId={ytId} autoplayEmbed={false} />;
   }
 
   if (isDirectVideoFileUrl(url)) {
