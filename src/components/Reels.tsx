@@ -29,6 +29,11 @@ const ReelCard = ({ reel }: { reel: Reel }) => (
       loading="lazy"
       decoding="async"
     />
+    <div className="pointer-events-none absolute inset-0 z-20 flex items-center justify-center">
+      <span className="inline-flex h-10 w-10 items-center justify-center rounded-full bg-black/60 text-white text-sm font-bold shadow-md">
+        ▶
+      </span>
+    </div>
 
     {/* Hover overlay */}
     <div className="pointer-events-none absolute inset-0 bg-black/0 group-hover:bg-black/30 transition-all duration-300 flex items-center justify-center z-20">

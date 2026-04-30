@@ -69,7 +69,15 @@ function ClipPlayer({ url }: { url: string }) {
   const ytId = extractYoutubeVideoId(url);
 
   if (ytId) {
-    return <YoutubeLazyPlayer videoId={ytId} autoplayEmbed={false} clickToPlay={true} />;
+    return (
+      <img
+        src={`https://i.ytimg.com/vi/${ytId}/hqdefault.jpg`}
+        alt="Testimonial video thumbnail"
+        className="absolute inset-0 h-full w-full object-cover"
+        loading="lazy"
+        decoding="async"
+      />
+    );
   }
 
   if (isDirectVideoFileUrl(url)) {
@@ -90,7 +98,7 @@ function ClipPlayer({ url }: { url: string }) {
 
 /** Uniform grid tiles on small screens — widths come from grid, not fixed w-32/w-40 tokens. */
 function mobileBandCardClass() {
-  return "w-full aspect-[10/13] max-h-[168px] sm:max-h-[190px] !max-w-none";
+  return "w-full aspect-[10/13] h-full !max-w-none";
 }
 
 function VideoClipCard({
@@ -103,26 +111,21 @@ function VideoClipCard({
   rotation?: string;
 }) {
   return (
-    <div
+    <a
+      href={url}
+      target="_blank"
+      rel="noopener noreferrer"
       className={cn(
         "group relative overflow-hidden rounded-2xl md:rounded-3xl shadow-xl transition-all duration-500 ease-out border border-white/5 bg-black/40 block",
         "hover:scale-105 hover:rotate-0 hover:z-20",
         rotation,
         className
       )}
+      aria-label="Open testimonial video in new tab"
     >
       <ClipPlayer url={url} />
-      <a
-        href={url}
-        target="_blank"
-        rel="noopener noreferrer"
-        className="absolute bottom-2 right-2 z-[4] rounded-full bg-black/65 px-2 py-1 text-[10px] font-semibold text-white/90"
-        aria-label="Open testimonial video in new tab"
-      >
-        Open ↗
-      </a>
       <div className="pointer-events-none absolute inset-0 z-[2] opacity-0 transition-opacity duration-300 group-hover:opacity-100 bg-black/25" />
-    </div>
+    </a>
   );
 }
 
