@@ -1,4 +1,8 @@
+import { useEffect, useState, useCallback } from "react";
 import { Film, Camera, Scissors, Video, Clapperboard, Mic } from "lucide-react";
+
+const AUTO_INTERVAL_MS = 3000;
+const CAROUSEL_BP = "(max-width: 1023px)";
 
 const services = [
   {
@@ -45,11 +49,61 @@ const services = [
   },
 ];
 
+function ServiceCard({
+  service,
+  className = "",
+}: {
+  service: (typeof services)[number];
+  className?: string;
+}) {
+  const Icon = service.icon;
+  return (
+    <div
+      className={`group relative bg-card/50 backdrop-blur-sm border border-border rounded-3xl p-8 hover:border-primary/30 hover:shadow-xl hover:shadow-primary/5 transition-all duration-500 hover:-translate-y-1 cursor-pointer ${className}`}
+    >
+      <div className="w-14 h-14 rounded-2xl bg-primary/10 flex items-center justify-center mb-6 group-hover:bg-primary/20 group-hover:scale-110 transition-all duration-300">
+        <Icon size={28} className="text-primary" strokeWidth={1.5} />
+      </div>
+      <h3 className="text-xl font-black text-foreground mb-3 group-hover:text-primary transition-colors">
+        {service.title}
+      </h3>
+      <p className="text-muted-foreground text-sm font-medium leading-relaxed">
+        {service.description}
+      </p>
+      <div className="absolute top-0 right-0 w-20 h-20 bg-gradient-to-bl from-primary/5 to-transparent rounded-tr-3xl rounded-bl-[3rem] opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+    </div>
+  );
+}
+
 export default function Services() {
+  const [index, setIndex] = useState(0);
+  const [showCarousel, setShowCarousel] = useState(() =>
+    typeof window !== "undefined" ? window.matchMedia(CAROUSEL_BP).matches : true,
+  );
+
+  useEffect(() => {
+    const mq = window.matchMedia(CAROUSEL_BP);
+    const update = () => setShowCarousel(mq.matches);
+    update();
+    mq.addEventListener("change", update);
+    return () => mq.removeEventListener("change", update);
+  }, []);
+
+  const goNext = useCallback(() => {
+    setIndex((i) => (i + 1) % services.length);
+  }, []);
+
+  useEffect(() => {
+    if (!showCarousel) return;
+    const id = window.setInterval(goNext, AUTO_INTERVAL_MS);
+    return () => window.clearInterval(id);
+  }, [showCarousel, goNext]);
+
+  const slidePct = 100 / services.length;
+
   return (
     <section id="services" className="relative pt-6 pb-6 sm:pt-10 sm:pb-14 md:py-24 lg:pt-12 lg:pb-16 bg-transparent z-10 overflow-hidden">
       <div className="relative z-10 w-full max-w-[95%] md:max-w-[85%] lg:max-w-[80%] mx-auto px-4 md:px-6">
-        {/* Header */}
         <div className="text-center mb-8 md:mb-16">
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black text-foreground mb-3 md:mb-4">
             What we do?
@@ -60,37 +114,57 @@ export default function Services() {
           </p>
         </div>
 
-        {/* Services Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {services.map((service) => {
-            const Icon = service.icon;
-            return (
+        {/* Desktop: original grid */}
+        <div className="hidden lg:grid lg:grid-cols-3 gap-6">
+          {services.map((service) => (
+            <ServiceCard key={service.title} service={service} />
+          ))}
+        </div>
+
+        {/* Mobile / tablet (&lt; lg): horizontal showcase */}
+        <div className="lg:hidden relative w-full overflow-hidden rounded-3xl">
+          <div
+            className="flex transition-transform duration-700 ease-out will-change-transform"
+            style={{
+              width: `${services.length * 100}%`,
+              transform: `translateX(-${index * slidePct}%)`,
+            }}
+          >
+            {services.map((service) => (
               <div
                 key={service.title}
-                className="group relative bg-card/50 backdrop-blur-sm border border-border rounded-3xl p-8 hover:border-primary/30 hover:shadow-xl hover:shadow-primary/5 transition-all duration-500 hover:-translate-y-1 cursor-pointer"
+                className="flex justify-center px-2 sm:px-4 box-border"
+                style={{ flex: `0 0 ${slidePct}%` }}
               >
-                {/* Icon */}
-                <div className="w-14 h-14 rounded-2xl bg-primary/10 flex items-center justify-center mb-6 group-hover:bg-primary/20 group-hover:scale-110 transition-all duration-300">
-                  <Icon
-                    size={28}
-                    className="text-primary"
-                    strokeWidth={1.5}
-                  />
-                </div>
-
-                {/* Content */}
-                <h3 className="text-xl font-black text-foreground mb-3 group-hover:text-primary transition-colors">
-                  {service.title}
-                </h3>
-                <p className="text-muted-foreground text-sm font-medium leading-relaxed">
-                  {service.description}
-                </p>
-
-                {/* Decorative corner */}
-                <div className="absolute top-0 right-0 w-20 h-20 bg-gradient-to-bl from-primary/5 to-transparent rounded-tr-3xl rounded-bl-[3rem] opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                <ServiceCard
+                  service={service}
+                  className="w-full max-w-xl mx-auto md:p-10"
+                />
               </div>
-            );
-          })}
+            ))}
+          </div>
+
+          <div
+            className="flex justify-center gap-1.5 mt-6 md:mt-8"
+            role="tablist"
+            aria-label="Service slides"
+          >
+            {services.map((_, i) => (
+              <button
+                key={i}
+                type="button"
+                role="tab"
+                aria-selected={i === index}
+                aria-label={`Go to service ${i + 1}`}
+                className={`h-1 min-h-[6px] rounded-full transition-all duration-300 ${
+                  i === index
+                    ? "w-5 bg-primary"
+                    : "w-1 min-w-[6px] bg-muted-foreground/40 hover:bg-muted-foreground/60"
+                }`}
+                onClick={() => setIndex(i)}
+              />
+            ))}
+          </div>
         </div>
       </div>
     </section>

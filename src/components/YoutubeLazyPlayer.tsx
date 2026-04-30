@@ -61,8 +61,8 @@ export default function YoutubeLazyPlayer({ videoId }: Props) {
         alt=""
         className={
           showEmbed
-            ? "absolute inset-0 z-0 h-full w-full object-cover opacity-0"
-            : "absolute inset-0 z-0 h-full w-full object-cover"
+            ? "absolute inset-0 z-0 h-full w-full object-contain md:object-cover opacity-0"
+            : "absolute inset-0 z-0 h-full w-full object-contain md:object-cover"
         }
         loading="lazy"
         decoding="async"
@@ -72,7 +72,9 @@ export default function YoutubeLazyPlayer({ videoId }: Props) {
         <iframe
           title="Video preview"
           src={embedSrc(videoId)}
-          className="pointer-events-none absolute left-1/2 top-[52%] z-[1] min-h-[132%] min-w-[132%] w-[132%] max-w-none -translate-x-1/2 -translate-y-1/2 border-0"
+          className="pointer-events-none absolute left-1/2 top-1/2 z-[1] origin-center max-w-none -translate-x-1/2 -translate-y-1/2 border-0
+            max-md:h-[115%] max-md:w-[115%] max-md:min-h-[115%] max-md:min-w-[115%]
+            md:top-[52%] md:h-auto md:w-[132%] md:min-h-[132%] md:min-w-[132%]"
           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
         />
       )}
