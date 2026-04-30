@@ -11,7 +11,7 @@ const Footer = () => {
   return (
     <footer 
       id="footer" 
-      className="relative w-full bg-transparent pt-12 md:pt-16 pb-0 overflow-hidden"
+      className="relative w-full bg-[#0d0d0d] pt-12 md:pt-20 pb-0 overflow-hidden"
     >
       {/* Subtle Purple Radial Glow */}
       <div 
@@ -112,7 +112,7 @@ const Footer = () => {
       </div>
 
       {/* BOTTOM BAR */}
-      <div className="w-full border-t border-[rgba(255,255,255,0.08)] bg-transparent">
+      <div className="w-full border-t border-[rgba(255,255,255,0.08)] bg-[#0d0d0d]">
         <div className="w-full max-w-[1600px] mx-auto px-4 sm:px-6 md:px-[80px] py-4 sm:py-6 flex flex-col sm:flex-row justify-between items-center gap-3 sm:gap-4">
           <p className="text-[#555555] text-[12px] text-center md:text-left">
             © {new Date().getFullYear()} Endurance Image. All rights reserved.

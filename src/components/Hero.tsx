@@ -90,12 +90,11 @@ export default function Hero() {
     },
   ];
 
-  // Memoize card calculations - updated for centered hover spacing
+  // Memoize card calculations - tuned for desktop viewport fit
   const cardCalculations = useMemo(() => {
-    const cardWidth = 240; // w-60 = 240px
+    const cardWidth = 176; // desktop card footprint
     const totalCards = images.length;
-    // Spacing offset set to card width + 16px gap
-    const spacingOffset = cardWidth + 16; 
+    const spacingOffset = 186;
     const totalWidth = (totalCards - 1) * spacingOffset;
     const startX = -totalWidth / 2; // Center properly
 
@@ -250,7 +249,7 @@ export default function Hero() {
               <div className="hidden lg:block relative w-full">
                 <div
                   ref={containerRef}
-                  className="relative h-[500px] w-full max-w-[1800px] flex items-center justify-center group mx-auto -mt-8"
+                  className="relative h-[440px] w-full max-w-[1600px] flex items-center justify-center group mx-auto -mt-8"
                   style={{
                     zIndex: isImageHovered ? 20 : 10,
                   }}
@@ -275,15 +274,15 @@ export default function Hero() {
                     >
                       {/* Image Container */}
                       <div
-                        className="w-60 h-80 rounded-3xl flex items-center justify-center overflow-hidden shadow-2xl border-4 border-white/50 bg-transparent backdrop-blur-md p-1"
+                        className="w-44 h-64 xl:w-48 xl:h-72 rounded-3xl flex items-center justify-center overflow-hidden shadow-2xl border-4 border-white/50 bg-transparent backdrop-blur-md p-1"
                       >
                         {image.link ? (
                           <a href={image.link} target="_blank" rel="noopener noreferrer" className="block w-full h-full cursor-pointer pointer-events-auto">
                             <img
                               src={image.src}
                               alt={image.alt}
-                              width={240}
-                              height={320}
+                              width={176}
+                              height={256}
                               className={`w-full h-full rounded-2xl transition-transform duration-300 object-cover bg-transparent pointer-events-none`}
                               loading={image.id <= 2 ? "eager" : "lazy"}
                               decoding={image.id <= 2 ? "sync" : "async"}
@@ -294,8 +293,8 @@ export default function Hero() {
                           <img
                             src={image.src}
                             alt={image.alt}
-                            width={240}
-                            height={320}
+                            width={176}
+                            height={256}
                             className={`w-full h-full rounded-2xl transition-transform duration-300 object-cover bg-transparent pointer-events-none`}
                             loading={image.id <= 2 ? "eager" : "lazy"}
                             decoding={image.id <= 2 ? "sync" : "async"}
@@ -307,45 +306,6 @@ export default function Hero() {
                   ))}
                 </div>
 
-                {/* Left Side Card - Positioned at circle location */}
-                 <div
-                  className="hidden 2xl:block absolute left-0 top-1/2 -translate-y-1/2 transition-all duration-500 w-80 h-[220px] hover:scale-105 hover:shadow-2xl"
-                  style={{
-                    filter: isImageHovered ? "blur(4px)" : "none",
-                    zIndex: isImageHovered ? 5 : 15,
-                  }}
-                >
-                  <div className="relative drop-shadow-xl w-full h-full overflow-hidden rounded-3xl bg-primary/10 border border-primary/20 backdrop-blur-md">
-                    <div className="relative flex flex-col items-center justify-center text-foreground z-[1] rounded-3xl p-6 h-full">
-                      <h3 className="text-xl font-extrabold text-primary mb-3 text-center">
-                        Award-Winning Productions
-                      </h3>
-                      <p className="text-muted-foreground text-sm text-center font-medium">
-                        From concept to final cut — we deliver cinematic experiences that leave a lasting impression.
-                      </p>
-                    </div>
-                  </div>
-                </div>
-
-                {/* Right Side Card - Positioned at circle location */}
-                <div
-                  className="hidden 2xl:block absolute right-0 top-1/2 -translate-y-1/2 transition-all duration-500 w-80 h-[220px] hover:scale-105 hover:shadow-2xl"
-                  style={{
-                    filter: isImageHovered ? "blur(4px)" : "none",
-                    zIndex: isImageHovered ? 5 : 15,
-                  }}
-                >
-                  <div className="relative drop-shadow-xl w-full h-full overflow-hidden rounded-3xl bg-primary/10 border border-primary/20 backdrop-blur-md">
-                    <div className="relative flex flex-col items-center justify-center text-foreground z-[1] rounded-3xl p-6 h-full">
-                      <h3 className="text-xl font-extrabold text-primary mb-3 text-center">
-                        End-to-End Creative Solutions
-                      </h3>
-                      <p className="text-muted-foreground text-sm text-center font-medium">
-                        Photography, videography, post-production & brand content — all under one roof.
-                      </p>
-                    </div>
-                  </div>
-                </div>
               </div>
             </div>
           </div>
