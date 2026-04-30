@@ -11,7 +11,7 @@ const Footer = () => {
   return (
     <footer 
       id="footer" 
-      className="relative w-full bg-[#0d0d0d] pt-16 md:pt-20 pb-0 overflow-hidden"
+      className="relative w-full bg-transparent pt-12 md:pt-16 pb-0 overflow-hidden"
     >
       {/* Subtle Purple Radial Glow */}
       <div 
@@ -54,31 +54,31 @@ const Footer = () => {
             </div>
 
             {/* Contact Details Stack */}
-            <div className="flex flex-col gap-6">
+            <div className="contact-info flex flex-col gap-3">
               
-              <div className="flex flex-col">
-                <span className="text-[#666666] uppercase text-xs md:text-sm font-semibold italic tracking-wider mb-1.5">
+              <div className="contact-item flex flex-col m-0 p-0">
+                <span className="contact-label text-[#666666] uppercase text-xs md:text-sm font-semibold italic tracking-wider mb-1.5 leading-none">
                   Our Studio
                 </span>
-                <span className="text-white text-[18px] md:text-[22px] font-semibold">
+                <span className="contact-value m-0 p-0 text-white text-[18px] md:text-[22px] font-semibold leading-tight">
                   A-74, 2nd Floor, Sector- 65, Noida- 201301
                 </span>
               </div>
 
-              <div className="flex flex-col">
-                <span className="text-[#666666] uppercase text-xs md:text-sm font-semibold italic tracking-wider mb-1.5">
+              <div className="contact-item flex flex-col m-0 p-0">
+                <span className="contact-label text-[#666666] uppercase text-xs md:text-sm font-semibold italic tracking-wider mb-1.5 leading-none">
                   Email Us
                 </span>
-                <a href="mailto:enduranceimage16@gmail.com" className="text-white text-[18px] md:text-[22px] font-semibold hover:text-[#a855f7] transition-colors">
+                <a href="mailto:enduranceimage16@gmail.com" className="contact-value m-0 p-0 text-white text-[18px] md:text-[22px] font-semibold leading-tight hover:text-[#a855f7] transition-colors">
                   enduranceimage16@gmail.com
                 </a>
               </div>
 
-              <div className="flex flex-col">
-                <span className="text-[#666666] uppercase text-xs md:text-sm font-semibold italic tracking-wider mb-1.5">
+              <div className="contact-item flex flex-col m-0 p-0">
+                <span className="contact-label text-[#666666] uppercase text-xs md:text-sm font-semibold italic tracking-wider mb-1.5 leading-none">
                   Phone
                 </span>
-                <a href="tel:+919582156943" className="text-white text-[18px] md:text-[22px] font-semibold hover:text-[#a855f7] transition-colors">
+                <a href="tel:+919582156943" className="contact-value m-0 p-0 text-white text-[18px] md:text-[22px] font-semibold leading-tight hover:text-[#a855f7] transition-colors">
                   +91 9582156943
                 </a>
               </div>
@@ -87,12 +87,19 @@ const Footer = () => {
 
           {/* RIGHT COLUMN: Interactive Map Embed */}
           <div className="lg:col-span-7 w-full flex flex-col items-center lg:items-end justify-start -mt-2 sm:-mt-1 lg:mt-0 lg:-translate-y-1">
-            <div className="w-full lg:w-[85%] xl:w-[75%] h-[200px] sm:h-[250px] md:h-[300px] rounded-3xl overflow-hidden shadow-[0_8px_40px_rgba(0,0,0,0.5)] border border-white/10">
+            <div className="relative w-full lg:w-[85%] xl:w-[75%] h-[200px] sm:h-[250px] md:h-[300px] rounded-3xl overflow-hidden shadow-[0_8px_40px_rgba(0,0,0,0.5)] border border-white/10">
+              <a
+                href="https://www.google.com/maps/search/?api=1&query=Endurance+Image,+A-74,+2nd+Floor,+Sector+65,+Noida+201301"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Open Endurance Image location in Google Maps"
+                className="absolute inset-0 z-20"
+              />
               {/* Google Maps iFrame */}
               <iframe 
                 title="Endurance Image Map Location"
                 src="https://maps.google.com/maps?q=Endurance+Image-+End+to+End+Podcast+Production+Studio&t=&z=14&ie=UTF8&iwloc=&output=embed" 
-                className="w-full h-full border-0 outline-none"
+                className="w-full h-full border-0 outline-none pointer-events-none"
                 allowFullScreen={true} 
                 loading="lazy" 
                 referrerPolicy="no-referrer-when-downgrade"
@@ -105,7 +112,7 @@ const Footer = () => {
       </div>
 
       {/* BOTTOM BAR */}
-      <div className="w-full border-t border-[rgba(255,255,255,0.08)] bg-[#0d0d0d]">
+      <div className="w-full border-t border-[rgba(255,255,255,0.08)] bg-transparent">
         <div className="w-full max-w-[1600px] mx-auto px-4 sm:px-6 md:px-[80px] py-4 sm:py-6 flex flex-col sm:flex-row justify-between items-center gap-3 sm:gap-4">
           <p className="text-[#555555] text-[12px] text-center md:text-left">
             © {new Date().getFullYear()} Endurance Image. All rights reserved.

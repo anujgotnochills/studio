@@ -2,7 +2,7 @@ import { ArrowRight } from 'lucide-react';
 
 const AboutUs = () => {
   return (
-    <section className="relative pt-6 pb-16 md:py-20 bg-background overflow-hidden" id="about">
+    <section className="relative pt-6 pb-10 md:py-20 bg-transparent overflow-hidden" id="about">
       <div className="max-w-[95%] md:max-w-[85%] lg:max-w-[80%] mx-auto px-4 md:px-6">
         <div className="flex flex-col lg:flex-row items-center gap-5 md:gap-12 lg:gap-20">
           
@@ -49,12 +49,12 @@ const AboutUs = () => {
               <p>
                 If the work is right, it speaks for itself. Most clients stay because they know their vision will be handled flawlessly.
               </p>
-              <a href="/gallery" className="inline-flex items-center mt-2 text-primary font-bold hover:underline transition-all">
+              <a href="/#studio" className="inline-flex items-center text-primary font-bold hover:underline transition-all">
                 View the studio here &rarr;
               </a>
             </div>
             
-            <div className="mt-4 md:mt-8 flex flex-col sm:flex-row gap-4">
+            <div className="mt-1 md:mt-2 flex flex-col sm:flex-row gap-4">
               <a 
                 href="https://wa.me/919582156943"
                 target="_blank"

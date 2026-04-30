@@ -184,10 +184,11 @@ html {
     @apply border-border;
   }
   body {
-    @apply bg-background text-foreground;
+    @apply text-foreground;
+    background-color: #08080b;
     background-image: 
-      linear-gradient(to right, hsl(var(--border) / 0.5) 1px, transparent 1px),
-      linear-gradient(to bottom, hsl(var(--border) / 0.5) 1px, transparent 1px);
+      linear-gradient(to right, hsl(var(--border) / 0.22) 1px, transparent 1px),
+      linear-gradient(to bottom, hsl(var(--border) / 0.22) 1px, transparent 1px);
     background-size: 40px 40px;
     background-attachment: fixed;
   }
@@ -223,3 +224,30 @@ html {
   scrollbar-color: hsl(var(--primary) / 0.4) hsl(var(--background));
 }
 
+/* Smooth and subtle blending between adjacent sections */
+.section {
+  background: linear-gradient(180deg, #08080b 0%, #0c0712 45%, #12081c 100%);
+}
+
+.section + .section {
+  margin-top: 0;
+}
+
+.section-transition,
+.smooth-transition {
+  position: relative;
+  overflow: hidden;
+}
+
+.section-transition::after,
+.smooth-transition::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -1px;
+  width: 100%;
+  height: 70px;
+  background: linear-gradient(to bottom, rgba(8, 8, 11, 0), rgba(8, 8, 11, 1));
+  pointer-events: none;
+  z-index: 1;
+}

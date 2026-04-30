@@ -41,13 +41,13 @@ function Home() {
   }, []);
 
   return (
-    <div className="min-h-screen bg-transparent relative overflow-x-hidden">
-      <div className="relative z-10">
+    <div className="min-h-screen bg-transparent relative overflow-hidden">
+      <div className="relative z-10 overflow-hidden">
         {/* Hero — studio intro */}
         <Hero />
 
         {/* Showreel */}
-        <div id="showreel" className="relative z-20">
+        <div id="showreel" className="relative z-20 smooth-transition">
           <LazySection preloadDistance={300} threshold={0.1}>
             <Suspense fallback={<LoadingFallback />}>
               <ContainerScrollDemo />
@@ -56,7 +56,7 @@ function Home() {
         </div>
 
         {/* Partners Marquee — Logo Loop */}
-        <section className="pt-4 pb-5 sm:pt-7 sm:pb-8 md:py-14 relative z-10 overflow-hidden">
+        <section className="smooth-transition pt-4 pb-5 sm:pt-7 sm:pb-8 md:py-14 relative z-10 overflow-hidden">
           <LazySection preloadDistance={300} threshold={0.1}>
             <div className="max-w-[95%] md:max-w-[85%] lg:max-w-[80%] mx-auto px-4 md:px-6 mb-4 md:mb-8 text-center">
               <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black text-foreground mb-4">
@@ -82,7 +82,7 @@ function Home() {
         </section>
 
         {/* Services */}
-        <div id="services" className="relative z-20">
+        <div id="services" className="relative z-20 smooth-transition">
           <LazySection preloadDistance={400} threshold={0.15}>
             <Suspense fallback={<LoadingFallback />}>
               <Services />
@@ -93,7 +93,7 @@ function Home() {
         {/* Curved stats marquee (same SVG arc as desktop on all breakpoints) */}
         <LazySection preloadDistance={300} threshold={0.1}>
           <section
-            className="relative px-4 md:px-6 pt-2 pb-0 md:pt-10 md:pb-8"
+            className="smooth-transition relative px-4 md:px-6 pt-2 pb-0 md:pt-10 md:pb-8"
             aria-label="Studio stats"
           >
             <Suspense
@@ -111,7 +111,7 @@ function Home() {
         </LazySection>
 
         {/* Studio Showcase — Masonry Gallery */}
-        <div id="studio">
+        <div id="studio" className="smooth-transition">
           <LazySection preloadDistance={400} threshold={0.15}>
             <Suspense fallback={<LoadingFallback />}>
               <StudioMasonry />
@@ -120,7 +120,7 @@ function Home() {
         </div>
 
         {/* Studio Reels */}
-        <div id="portfolio">
+        <div id="portfolio" className="smooth-transition">
           <LazySection preloadDistance={400} threshold={0.15}>
             <Suspense fallback={<LoadingFallback />}>
               <Reels />
@@ -129,7 +129,7 @@ function Home() {
         </div>
 
         {/* About Us */}
-        <div id="about">
+        <div id="about" className="smooth-transition section">
           <LazySection preloadDistance={400} threshold={0.15}>
             <Suspense fallback={<LoadingFallback />}>
               <AboutUs />
@@ -140,12 +140,14 @@ function Home() {
         {/* Our Team */}
         <LazySection preloadDistance={400} threshold={0.15}>
           <Suspense fallback={<LoadingFallback />}>
-            <Team />
+            <div className="smooth-transition section">
+              <Team />
+            </div>
           </Suspense>
         </LazySection>
 
         {/* Testimonials */}
-        <div id="testimonials">
+        <div id="testimonials" className="smooth-transition section">
           <LazySection preloadDistance={400} threshold={0.15}>
             <Suspense fallback={<LoadingFallback />}>
               <VideoTestimonials />
@@ -158,7 +160,7 @@ function Home() {
         {/* Footer */}
         <LazySection preloadDistance={300} threshold={0.2}>
           <Suspense fallback={<LoadingFallback />}>
-            <div className="mb-8">
+            <div className="mb-8 smooth-transition section">
               <Footer />
             </div>
           </Suspense>
