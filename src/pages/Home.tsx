@@ -41,8 +41,8 @@ function Home() {
   }, []);
 
   return (
-    <div className="min-h-screen bg-transparent relative overflow-hidden">
-      <div className="relative z-10 overflow-hidden">
+    <div className="min-h-screen bg-transparent relative overflow-x-hidden">
+      <div className="relative z-10">
         {/* Hero — studio intro */}
         <Hero />
 

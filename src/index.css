@@ -236,7 +236,8 @@ html {
 .section-transition,
 .smooth-transition {
   position: relative;
-  overflow: hidden;
+  overflow: visible;
+  z-index: 0;
 }
 
 .section-transition::after,
@@ -249,5 +250,11 @@ html {
   height: 70px;
   background: linear-gradient(to bottom, rgba(8, 8, 11, 0), rgba(8, 8, 11, 1));
   pointer-events: none;
+  z-index: 0;
+}
+
+.section-transition > *,
+.smooth-transition > * {
+  position: relative;
   z-index: 1;
 }
