@@ -56,7 +56,7 @@ const Footer = () => {
             {/* Contact Details Stack */}
             <div className="contact-info flex flex-col gap-0 md:gap-3">
               
-              <div className="contact-item flex flex-col m-0 p-0 mb-6 md:mb-0">
+              <div className="contact-item flex flex-col m-0 p-0 mb-4 md:mb-0">
                 <span className="contact-label text-[#666666] uppercase text-xs md:text-sm font-semibold italic tracking-wider mb-1.5 leading-none">
                   Our Studio
                 </span>

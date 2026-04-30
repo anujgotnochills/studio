@@ -28,17 +28,23 @@ function thumbUrl(videoId: string) {
 type Props = {
   videoId: string;
   autoplayEmbed?: boolean;
+  clickToPlay?: boolean;
 };
 
 /**
  * Fast poster (JPEG) first; when the card nears the viewport, mount a muted autoplay embed.
  * pointer-events-none on iframe so parent links still work.
  */
-export default function YoutubeLazyPlayer({ videoId, autoplayEmbed = true }: Props) {
+export default function YoutubeLazyPlayer({
+  videoId,
+  autoplayEmbed = true,
+  clickToPlay = false,
+}: Props) {
   const rootRef = useRef<HTMLDivElement>(null);
   const [showEmbed, setShowEmbed] = useState(false);
 
   useEffect(() => {
+    if (clickToPlay) return;
     if (!autoplayEmbed) return;
     const root = rootRef.current;
     if (!root) return;
@@ -55,8 +61,10 @@ export default function YoutubeLazyPlayer({ videoId, autoplayEmbed = true }: Pro
     );
 
     io.observe(root);
-    return () => io.disconnect();
-  }, [autoplayEmbed]);
+    return () => {
+      io.disconnect();
+    };
+  }, [autoplayEmbed, clickToPlay]);
 
   return (
     <div ref={rootRef} className="absolute inset-0 overflow-hidden bg-black">
@@ -65,19 +73,31 @@ export default function YoutubeLazyPlayer({ videoId, autoplayEmbed = true }: Pro
         alt=""
         className={
           showEmbed
-            ? "absolute inset-0 z-0 h-full w-full object-contain md:object-cover opacity-0"
-            : "absolute inset-0 z-0 h-full w-full object-contain md:object-cover"
+            ? "absolute inset-0 z-0 h-full w-full object-cover opacity-0"
+            : "absolute inset-0 z-0 h-full w-full object-cover"
         }
         loading="lazy"
         decoding="async"
         fetchPriority="low"
       />
-      {autoplayEmbed && showEmbed && (
+      {clickToPlay && !showEmbed && (
+        <button
+          type="button"
+          onClick={() => setShowEmbed(true)}
+          className="absolute inset-0 z-[3] flex items-center justify-center bg-black/20"
+          aria-label="Play video preview"
+        >
+          <span className="inline-flex h-10 w-10 items-center justify-center rounded-full bg-black/65 text-white text-sm font-bold">
+            ▶
+          </span>
+        </button>
+      )}
+      {showEmbed && (
         <iframe
           title="Video preview"
           src={embedSrc(videoId)}
           className="pointer-events-none absolute left-1/2 top-1/2 z-[1] origin-center max-w-none -translate-x-1/2 -translate-y-1/2 border-0
-            max-md:h-[115%] max-md:w-[115%] max-md:min-h-[115%] max-md:min-w-[115%]
+            max-md:top-1/2 max-md:h-full max-md:w-[325%] max-md:min-h-full max-md:min-w-[325%]
             md:top-[52%] md:h-auto md:w-[132%] md:min-h-[132%] md:min-w-[132%]"
           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
         />

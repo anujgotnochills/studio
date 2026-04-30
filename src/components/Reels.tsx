@@ -22,10 +22,16 @@ const ReelCard = ({ reel }: { reel: Reel }) => (
     <div className="absolute inset-0 rounded-3xl ring-2 ring-white/10 z-10 pointer-events-none" />
 
     {/* Poster loads first; muted autoplay embed when card enters view */}
-    <YoutubeLazyPlayer videoId={reel.videoId} />
+    <img
+      src={`https://i.ytimg.com/vi/${reel.videoId}/hqdefault.jpg`}
+      alt={reel.title}
+      className="absolute inset-0 h-full w-full object-cover"
+      loading="lazy"
+      decoding="async"
+    />
 
-    {/* Hover overlay — click to open full video */}
-    <div className="absolute inset-0 bg-black/0 group-hover:bg-black/30 transition-all duration-300 flex items-center justify-center z-20">
+    {/* Hover overlay */}
+    <div className="pointer-events-none absolute inset-0 bg-black/0 group-hover:bg-black/30 transition-all duration-300 flex items-center justify-center z-20">
       <span className="opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-black/90 text-white text-xs font-black px-3 py-1.5 rounded-full tracking-wide">
         Watch Full ↗
       </span>
