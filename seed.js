@@ -68,21 +68,32 @@ async function createTables() {
       display_order INTEGER DEFAULT 0,
       created_at TIMESTAMPTZ DEFAULT now()
     );`,
+    `CREATE TABLE IF NOT EXISTS studio_photos (
+      id UUID DEFAULT gen_random_uuid() PRIMARY KEY,
+      image_url TEXT NOT NULL,
+      caption TEXT DEFAULT '',
+      height INTEGER DEFAULT 400,
+      display_order INTEGER DEFAULT 0,
+      created_at TIMESTAMPTZ DEFAULT now()
+    );`,
     // RLS
     `ALTER TABLE gallery_photos ENABLE ROW LEVEL SECURITY;`,
     `ALTER TABLE testimonials ENABLE ROW LEVEL SECURITY;`,
     `ALTER TABLE reels ENABLE ROW LEVEL SECURITY;`,
     `ALTER TABLE partner_logos ENABLE ROW LEVEL SECURITY;`,
+    `ALTER TABLE studio_photos ENABLE ROW LEVEL SECURITY;`,
     // Public read policies (drop first to avoid duplicates)
     `DROP POLICY IF EXISTS "Public read gallery_photos" ON gallery_photos; CREATE POLICY "Public read gallery_photos" ON gallery_photos FOR SELECT USING (true);`,
     `DROP POLICY IF EXISTS "Public read testimonials" ON testimonials; CREATE POLICY "Public read testimonials" ON testimonials FOR SELECT USING (true);`,
     `DROP POLICY IF EXISTS "Public read reels" ON reels; CREATE POLICY "Public read reels" ON reels FOR SELECT USING (true);`,
     `DROP POLICY IF EXISTS "Public read partner_logos" ON partner_logos; CREATE POLICY "Public read partner_logos" ON partner_logos FOR SELECT USING (true);`,
+    `DROP POLICY IF EXISTS "Public read studio_photos" ON studio_photos; CREATE POLICY "Public read studio_photos" ON studio_photos FOR SELECT USING (true);`,
     // Auth write policies
     `DROP POLICY IF EXISTS "Auth write gallery_photos" ON gallery_photos; CREATE POLICY "Auth write gallery_photos" ON gallery_photos FOR ALL USING (auth.role() = 'authenticated');`,
     `DROP POLICY IF EXISTS "Auth write testimonials" ON testimonials; CREATE POLICY "Auth write testimonials" ON testimonials FOR ALL USING (auth.role() = 'authenticated');`,
     `DROP POLICY IF EXISTS "Auth write reels" ON reels; CREATE POLICY "Auth write reels" ON reels FOR ALL USING (auth.role() = 'authenticated');`,
     `DROP POLICY IF EXISTS "Auth write partner_logos" ON partner_logos; CREATE POLICY "Auth write partner_logos" ON partner_logos FOR ALL USING (auth.role() = 'authenticated');`,
+    `DROP POLICY IF EXISTS "Auth write studio_photos" ON studio_photos; CREATE POLICY "Auth write studio_photos" ON studio_photos FOR ALL USING (auth.role() = 'authenticated');`,
   ];
 
   for (const query of queries) {
@@ -142,11 +153,22 @@ const galleryPhotos = [
   { image_url: '/media/curved-images/trinity.webp', caption: 'Trinity', display_order: 11 },
 ];
 
+const studioPhotos = [
+  { image_url: '/media/curved-images/akashh.webp', caption: 'Akash', height: 400, display_order: 0 },
+  { image_url: '/media/curved-images/gaurav.webp', caption: 'Gaurav', height: 320, display_order: 1 },
+  { image_url: '/media/curved-images/bca-syncup.webp', caption: 'BCA Sync Up', height: 520, display_order: 2 },
+  { image_url: '/media/curved-images/bcaa.webp', caption: 'BCA Team', height: 360, display_order: 3 },
+  { image_url: '/media/curved-images/cb-syncup.webp', caption: 'CB Sync Up', height: 460, display_order: 4 },
+  { image_url: '/media/curved-images/groupp.webp', caption: 'Group Photo', height: 340, display_order: 5 },
+  { image_url: '/media/curved-images/himanshi-syncup.webp', caption: 'Himanshi Sync Up', height: 420, display_order: 6 },
+  { image_url: '/media/curved-images/hiya-sak.webp', caption: 'Hiya & Saksham', height: 380, display_order: 7 },
+];
+
 async function main() {
   console.log('🚀 Seeding Supabase database...\n');
 
-  // Note: exec_sql RPC may not exist by default. Use direct REST API to insert instead.
-  // Tables must be created manually via SQL Editor first. This script seeds the data.
+  // Create any missing tables/policies first.
+  await createTables();
 
   console.log('📋 Seeding testimonials...');
   await insert('testimonials', testimonials);
@@ -159,6 +181,9 @@ async function main() {
 
   console.log('🖼️  Seeding gallery photos...');
   await insert('gallery_photos', galleryPhotos);
+
+  console.log('🎞️  Seeding studio photos...');
+  await insert('studio_photos', studioPhotos);
 
   console.log('\n✅ Done! Refresh your dashboard to see the data.');
 }
