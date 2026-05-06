@@ -30,6 +30,7 @@ export type ClientConfig = {
 type ClientConfigContextValue = {
   clientId: string | null;
   config: ClientConfig;
+  isReady: boolean;
 };
 
 const defaultConfig: ClientConfig = {
@@ -66,6 +67,7 @@ const defaultConfig: ClientConfig = {
 const ClientConfigContext = createContext<ClientConfigContextValue>({
   clientId: null,
   config: defaultConfig,
+  isReady: true,
 });
 
 function getClientId(): string | null {
@@ -107,25 +109,27 @@ function withDefaults(config: Partial<ClientConfig>): ClientConfig {
 }
 
 export function ClientConfigProvider({ children }: { children: React.ReactNode }) {
-  const [clientId, setClientId] = useState<string | null>(null);
+  const [clientId] = useState<string | null>(() => getClientId());
   const [config, setConfig] = useState<ClientConfig>(defaultConfig);
+  const [isReady, setIsReady] = useState<boolean>(() => !getClientId());
 
   useEffect(() => {
-    const resolvedClientId = getClientId();
-    setClientId(resolvedClientId);
-    if (!resolvedClientId) return;
+    if (!clientId) return;
 
     fetch("/clients.json")
       .then((res) => (res.ok ? res.json() : {}))
       .then((clients: Record<string, Partial<ClientConfig>>) => {
-        const clientConfig = clients[resolvedClientId];
+        const clientConfig = clients[clientId];
         if (!clientConfig) return;
         setConfig(withDefaults(clientConfig));
       })
       .catch(() => {
         // Keep defaults if client JSON is missing/unavailable.
+      })
+      .finally(() => {
+        setIsReady(true);
       });
-  }, []);
+  }, [clientId]);
 
   useEffect(() => {
     document.title = `${config.name} - ${config.tagline || "Website"}`;
@@ -137,7 +141,26 @@ export function ClientConfigProvider({ children }: { children: React.ReactNode }
     if (ogDescription) ogDescription.setAttribute("content", config.description);
   }, [config]);
 
-  const value = useMemo(() => ({ clientId, config }), [clientId, config]);
+  const value = useMemo(() => ({ clientId, config, isReady }), [clientId, config, isReady]);
+
+  if (!isReady) {
+    return (
+      <div
+        style={{
+          minHeight: "100vh",
+          background: "#0d0d0d",
+          color: "#fff",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          fontFamily: "Outfit, Arial, sans-serif",
+        }}
+      >
+        Loading client website...
+      </div>
+    );
+  }
+
   return <ClientConfigContext.Provider value={value}>{children}</ClientConfigContext.Provider>;
 }
 
