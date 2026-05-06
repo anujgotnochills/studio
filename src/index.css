@@ -1,0 +1,273 @@
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&display=swap');
+/* Import Locomotive Scroll CSS */
+
+
+@import "tailwindcss/base";
+@import "tailwindcss/components";
+@import "tailwindcss/utilities";
+
+/* Lausanne font (K72's original font) - Optional fallback */
+@font-face {
+  font-family: 'Lausanne';
+  src: url('https://fonts.cdnfonts.com/css/lausanne') format('woff2');
+  font-weight: 300;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Lausanne';
+  src: url('https://fonts.cdnfonts.com/css/lausanne') format('woff2');
+  font-weight: 500;
+  font-display: swap;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  -webkit-tap-highlight-color: transparent;
+}
+
+html {
+  /* Remove default smooth scrolling to let Lenis handle it */
+  scroll-behavior: auto;
+  /* Fluid base font: 14px at 320px, 16px at 1200px */
+  font-size: clamp(0.875rem, 0.8rem + 0.25vw, 1rem);
+}
+
+@media (min-width: 1024px) {
+  html {
+    font-size: 90%;
+  }
+}
+
+/* Lenis smooth scrolling styles */
+html.lenis {
+  height: auto;
+}
+
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+
+.lenis.lenis-smooth [data-lenis-prevent] {
+  overscroll-behavior: contain;
+}
+
+body, #root {
+  font-family: 'Outfit', sans-serif;
+  max-width: 100vw;
+  /* For smooth scroll implementation */
+  position: relative;
+  min-height: 100vh;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+/* Ensure images and videos never overflow */
+img, video, iframe {
+  max-width: 100%;
+  height: auto;
+}
+
+/* Touch-friendly minimum target sizes */
+@media (pointer: coarse) {
+  button, a, [role="button"] {
+    min-height: 44px;
+    min-width: 44px;
+  }
+}
+
+/* Removed old smooth scrolling styles - using Lenis now */
+
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+p {
+  line-height: 1.5;
+}
+
+/* Hide scrollbar for Chrome, Safari and Opera */
+::-webkit-scrollbar {
+  display: none;
+}
+
+/* Hide scrollbar for IE, Edge and Firefox */
+html {
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
+}
+
+@keyframes marquee-left {
+  0% {
+    transform: translateX(0%);
+  }
+
+  100% {
+    transform: translateX(-100%);
+  }
+}
+
+@keyframes marquee-right {
+  0% {
+    transform: translateX(-100%);
+  }
+
+  100% {
+    transform: translateX(0%);
+  }
+}
+
+.animate-marquee-left {
+  animation: marquee-left 30s linear infinite;
+}
+
+.animate-marquee-right {
+  animation: marquee-right 30s linear infinite;
+}
+
+@layer base {
+  :root {
+    /* Made it black/purple everywhere */
+    --background: 0 0% 4%;
+    --foreground: 0 0% 97%;
+    --card: 0 0% 8%;
+    --card-foreground: 0 0% 97%;
+    --popover: 0 0% 8%;
+    --popover-foreground: 0 0% 97%;
+    --primary: 270 100% 60%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 0 0% 12%;
+    --secondary-foreground: 0 0% 97%;
+    --muted: 0 0% 12%;
+    --muted-foreground: 0 0% 60%;
+    --accent: 270 60% 15%;
+    --accent-foreground: 0 0% 97%;
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 0 0% 97%;
+    --border: 0 0% 16%;
+    --input: 0 0% 16%;
+    --ring: 270 100% 60%;
+    --radius: 1.5rem;
+  }
+  .dark {
+    /* Dark mode: black background, white text, purple primary */
+    --background: 0 0% 4%;
+    --foreground: 0 0% 97%;
+    --card: 0 0% 8%;
+    --card-foreground: 0 0% 97%;
+    --popover: 0 0% 8%;
+    --popover-foreground: 0 0% 97%;
+    --primary: 270 100% 60%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 0 0% 12%;
+    --secondary-foreground: 0 0% 97%;
+    --muted: 0 0% 12%;
+    --muted-foreground: 0 0% 60%;
+    --accent: 25 60% 15%;
+    --accent-foreground: 0 0% 97%;
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 0 0% 97%;
+    --border: 0 0% 16%;
+    --input: 0 0% 16%;
+    --ring: 270 100% 60%;
+  }
+}
+
+
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply text-foreground;
+    background-color: #08080b;
+    background-image: 
+      linear-gradient(to right, hsl(var(--border) / 0.22) 1px, transparent 1px),
+      linear-gradient(to bottom, hsl(var(--border) / 0.22) 1px, transparent 1px);
+    background-size: 40px 40px;
+    background-attachment: fixed;
+  }
+}
+
+::selection {
+  background: #a855f7;
+  color: #ffffff;
+}
+
+::-moz-selection {
+  background: #a855f7;
+  color: #ffffff;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: hsl(var(--background));
+}
+::-webkit-scrollbar-thumb {
+  background: hsl(var(--primary) / 0.4);
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: hsl(var(--primary) / 0.7);
+}
+
+* {
+  scrollbar-width: thin;
+  scrollbar-color: hsl(var(--primary) / 0.4) hsl(var(--background));
+}
+
+.section-transition,
+.smooth-transition {
+  position: static;
+}
+
+/* Keep transition treatment mobile-only so desktop layout stays unchanged */
+@media (max-width: 767px) {
+  .section-transition,
+  .smooth-transition {
+    position: relative;
+    overflow: visible;
+    z-index: 0;
+  }
+
+  .section-transition > *,
+  .smooth-transition > * {
+    position: relative;
+    z-index: 1;
+  }
+
+  .section {
+    background: linear-gradient(180deg, #08080b 0%, #0c0712 45%, #12081c 100%);
+  }
+
+  .section + .section {
+    margin-top: 0;
+  }
+
+  .section-transition::after,
+  .smooth-transition::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: -1px;
+    width: 100%;
+    height: 70px;
+    background: linear-gradient(to bottom, rgba(8, 8, 11, 0), rgba(8, 8, 11, 1));
+    pointer-events: none;
+    z-index: 0;
+  }
+}

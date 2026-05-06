@@ -5,7 +5,16 @@
     "description": "XYZ Studio focuses on cinematic films, branded content, and premium photography.",
     "phone": "+91-98765-43210",
     "email": "hello@xyzstudio.com",
-    "address": "Mumbai, India"
+    "address": "Mumbai, India",
+    "founderName": "Founder Name",
+    "founderRole": "Founder",
+    "heroSubtitle": "Create films that move people.",
+    "showreelVideo": "/media/mac-vid.mp4",
+    "aboutLine1": "XYZ Studio is a premium visual production company for modern brands.",
+    "social": {
+      "instagram": "https://instagram.com/",
+      "youtube": "https://youtube.com/"
+    }
   },
   "abc": {
     "name": "ABC Creatives",
@@ -13,7 +22,11 @@
     "description": "ABC Creatives provides end-to-end creative production for digital-first brands.",
     "phone": "+91-99887-77665",
     "email": "contact@abccreatives.com",
-    "address": "Delhi, India"
+    "address": "Delhi, India",
+    "founderName": "Founder Name",
+    "founderRole": "Creative Director",
+    "heroSubtitle": "Design-led storytelling for growth brands.",
+    "showreelVideo": "/media/mac-vid.mp4"
   },
   "rabbit_and_turtle_studios": {
     "name": "Rabbit and Turtle Studios",
@@ -21,6 +34,20 @@
     "description": "Rabbit and Turtle Studios offers premium podcast, music recording, and creative event production with a modern aesthetic studio setup.",
     "phone": "+91-90908-02008",
     "email": "contact@rabbitandturtlestudios.com",
-    "address": "906, 907 Aston Building, Lokhandwala Rd, Andheri West, Mumbai, Maharashtra 400053"
+    "address": "906, 907 Aston Building, Lokhandwala Rd, Andheri West, Mumbai, Maharashtra 400053",
+    "founderName": "Founder Name",
+    "founderRole": "Founder",
+    "founderImage": "/media/owner_photo.png",
+    "heroSubtitle": "End-to-end production, from concept to final edit.",
+    "showreelVideo": "/media/mac-vid.mp4",
+    "aboutLine1": "Rabbit and Turtle Studios is a creative production house focused on high-quality podcast, music, and brand content.",
+    "aboutLine2": "From concept development to final delivery, we execute with clarity, speed, and visual excellence.",
+    "aboutLine3": "Our clients stay because every project is handled like a long-term partnership.",
+    "social": {
+      "whatsapp": "https://wa.me/919090802008",
+      "instagram": "https://instagram.com/rabbitandturtlestudios",
+      "linkedin": "https://linkedin.com/",
+      "youtube": "https://youtube.com/"
+    }
   }
 }
