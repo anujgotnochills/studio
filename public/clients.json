@@ -1,0 +1,26 @@
+{
+  "xyz": {
+    "name": "XYZ Studio",
+    "tagline": "Premium Visual Storytelling",
+    "description": "XYZ Studio focuses on cinematic films, branded content, and premium photography.",
+    "phone": "+91-98765-43210",
+    "email": "hello@xyzstudio.com",
+    "address": "Mumbai, India"
+  },
+  "abc": {
+    "name": "ABC Creatives",
+    "tagline": "Design. Capture. Inspire.",
+    "description": "ABC Creatives provides end-to-end creative production for digital-first brands.",
+    "phone": "+91-99887-77665",
+    "email": "contact@abccreatives.com",
+    "address": "Delhi, India"
+  },
+  "rabbit_and_turtle_studios": {
+    "name": "Rabbit and Turtle Studios",
+    "tagline": "Create. Record. Perform.",
+    "description": "Rabbit and Turtle Studios offers premium podcast, music recording, and creative event production with a modern aesthetic studio setup.",
+    "phone": "+91-90908-02008",
+    "email": "contact@rabbitandturtlestudios.com",
+    "address": "906, 907 Aston Building, Lokhandwala Rd, Andheri West, Mumbai, Maharashtra 400053"
+  }
+}
