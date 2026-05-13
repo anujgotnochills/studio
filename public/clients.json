@@ -28,26 +28,12 @@
     "heroSubtitle": "Design-led storytelling for growth brands.",
     "showreelVideo": "/media/mac-vid.mp4"
   },
-  "rabbit_and_turtle_studios": {
-    "name": "Rabbit and Turtle Studios",
-    "tagline": "Create. Record. Perform.",
-    "description": "Rabbit and Turtle Studios offers premium podcast, music recording, and creative event production with a modern aesthetic studio setup.",
-    "phone": "+91-90908-02008",
-    "email": "contact@rabbitandturtlestudios.com",
-    "address": "906, 907 Aston Building, Lokhandwala Rd, Andheri West, Mumbai, Maharashtra 400053",
-    "founderName": "Founder Name",
-    "founderRole": "Founder",
-    "founderImage": "/media/owner_photo.png",
-    "heroSubtitle": "End-to-end production, from concept to final edit.",
-    "showreelVideo": "/media/mac-vid.mp4",
-    "aboutLine1": "Rabbit and Turtle Studios is a creative production house focused on high-quality podcast, music, and brand content.",
-    "aboutLine2": "From concept development to final delivery, we execute with clarity, speed, and visual excellence.",
-    "aboutLine3": "Our clients stay because every project is handled like a long-term partnership.",
-    "social": {
-      "whatsapp": "https://wa.me/919090802008",
-      "instagram": "https://instagram.com/rabbitandturtlestudios",
-      "linkedin": "https://linkedin.com/",
-      "youtube": "https://youtube.com/"
-    }
+  "the_podcast_studio": {
+  "name": "The Podcast Studio",
+  "tagline": "Professional podcast production space",
+  "description": "The Podcast Studio in Saket offers a dedicated setup for podcast recording, interviews, and content creation with a focus on clean audio and modern production.",
+  "phone": "",
+  "email": "contact@thepodcaststudio.com",
+  "address": "Saket, New Delhi, Delhi"
   }
 }
